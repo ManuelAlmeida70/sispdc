@@ -1,0 +1,89 @@
+﻿@model List<SisPDC.Models.Entities.EspecialidadeModel>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Listar Especialidades";
+}
+
+@section Styles {
+    <link href="~/css/especialidade.css" rel="stylesheet" />
+}
+
+
+
+<!-- Main content -->
+<div class="content-wrapper p-2">
+    <a asp-action="GerarRelatorioPDF" asp-controller="Medico" class="btn btn-primary text-white" target="_blank">
+        <i class="bi bi-file-pdf me-2"></i> Gerar Relatório PDF
+    </a>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <div class="data-table-card">
+        <div class="table-header">
+            <h4>Lista de Especialidades</h4>
+            <!-- Botão para abrir criar -->
+            <a asp-action="Criar" asp-controller="Especialidade" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Adicionar Especialidade
+            </a>
+        </div>
+        <div class="table-responsive p-2">
+            <table id="especialidade" class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Data de Cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Any() && Model != null)
+                    {
+                        foreach(var especialidade in Model)
+                        {
+                            <tr>
+                                <td>#@especialidade.Id.ToString("D3")</td>
+                                <td>@especialidade.Descricao</td>
+                                <td>@especialidade.DateTime.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a asp-action="Editar" asp-controller="Especialidade"
+                                        asp-route-id="@especialidade.Id" class="btn-action btn-edit">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <a asp-action="Eliminar"
+                                           asp-controller="Especialidade"
+                                           asp-route-id="@especialidade.Id"
+                                           class="btn-action btn-delete">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center" style="padding: 3rem;">
+                                <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                                <p style="margin-top: 1rem; color: #666;">Nenhuma especialidade cadastrada.</p>
+                            </td>
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

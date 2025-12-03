@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Eliminar Pessoal Clínico (Layout Estático)";
+
+    // VARIÁVEIS DE DADOS ESTÁTICOS (PLACEHOLDER)
+    var nomeClinico = "Dr. João Silva (Estático)";
+    var idClinico = "PC0001";
+    var cargoClinico = "Médico";
+    var especialidadeClinico = "Pediatria";
+    var urlBase = "/PessoalClinico"; // Define a URL base para as ações
+}
+@section Styles {
+    <link href="~/css/pessoalClinico.css" rel="stylesheet" /> @* Usaremos o CSS do Pessoal Clínico *@
+}
+
+<div class="content-wrapper">
+    <div class="data-table-card">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-person-x me-2"></i> Eliminar Pessoal Clínico
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">⚠️ Confirmação Necessária (Modo Estático)</h4>
+                    <p class="mb-0">
+                        Você está prestes a eliminar o seguinte registo de Pessoal Clínico. **Estes dados são apenas de exemplo** para validação do layout.
+                    </p>
+                </div>
+
+                @* --- EXIBIÇÃO DOS DADOS ESTÁTICOS --- *@
+                <div class="mb-4 border rounded p-4 bg-light">
+
+                    <div class="row">
+                        @* ID e Nome *@
+                        <div class="col-md-8">
+                            <label class="form-label text-muted mb-0">Nome Completo</label>
+                            <p class="h4 text-danger mt-1 mb-3">
+                                <i class="bi bi-person-fill me-2"></i> **@nomeClinico**
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label text-muted mb-0">ID de Registo</label>
+                            <p class="h4 text-dark mt-1 mb-3">
+                                <i class="bi bi-key me-2"></i> **@idClinico**
+                            </p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr class="my-2" />
+                        </div>
+
+                        @* Cargo e Especialidade *@
+                        <div class="col-md-6">
+                            <label class="form-label text-muted mb-0">Cargo</label>
+                            <p class="fw-bold text-dark mt-1 mb-0">
+                                @cargoClinico
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted mb-0">Especialidade</label>
+                            <p class="fw-bold text-dark mt-1 mb-0">
+                                @especialidadeClinico
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                @* FORMULÁRIO (Ação estática) *@
+                <form action="@(urlBase)/EliminarConfirmar" method="post">
+                    @* Ação hipotética para a confirmação *@
+                    @* Campo Oculto para o ID (chave primária - Apenas para simular) *@
+                    <input type="hidden" name="Id" value="@idClinico" />
+
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="bi bi-trash-fill me-2"></i> Confirmar Eliminação
+                        </button>
+
+                        @* Link de Cancelar (URL estática) *@
+                        <a asp-action="Listar" asp-controller="Medico" class="btn btn-secondary btn-lg">
+                            <i class="bi bi-x-circle me-2"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

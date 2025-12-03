@@ -1,0 +1,125 @@
+﻿<style >
+:root {
+    --primary-blue: #0d6efd;
+    --dark-blue: #0a58ca;
+    --light-blue: #e7f1ff;
+    --error-red: #dc3545;
+    --success-green: #198754;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+    color: white;
+    padding: 120px 0;
+}
+
+/* Menu melhorado */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+    .navbar-nav .nav-link:hover {
+        background-color: var(--light-blue);
+        color: var(--primary-blue) !important;
+    }
+
+    .navbar-nav .nav-link.active {
+        background-color: var(--primary-blue);
+        color: white !important;
+    }
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+    .dropdown-item:hover {
+        background-color: var(--light-blue);
+        color: var(--primary-blue);
+    }
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--primary-blue);
+    font-size: 2rem;
+}
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light-custom {
+    background-color: var(--light-blue);
+}
+
+.doctor-card {
+    border-left: 4px solid var(--primary-blue);
+}
+
+.service-card {
+    border-top: 4px solid var(--primary-blue);
+}
+
+.stats-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+    color: white;
+}
+
+.stats-number {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        margin-top: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0.25rem 0;
+    }
+
+    .d-flex.gap-2 {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+        .d-flex.gap-2 .btn {
+            width: 100%;
+            margin: 0.25rem 0;
+        }
+}
+
+</style >

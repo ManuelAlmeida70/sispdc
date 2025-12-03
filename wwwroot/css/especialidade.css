@@ -1,0 +1,253 @@
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    margin-left: 400px;
+}
+
+.data-table-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+.table-header {
+    padding: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .table-header h4 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+    }
+
+.btn-primary-custom {
+    background: #1e88e5;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+
+    .btn-primary-custom:hover {
+        background: #1565c0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+    }
+
+.data-table {
+    width: 100%;
+    margin: 0;
+}
+
+    .data-table thead {
+        background: #f8f9fa;
+    }
+
+    .data-table th {
+        padding: 15px 25px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: none;
+    }
+
+    .data-table td {
+        padding: 18px 25px;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        color: #333;
+    }
+
+    .data-table tbody tr {
+        transition: background 0.3s;
+    }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+.btn-edit {
+    background: #e3f2fd;
+    color: #1e88e5;
+}
+
+    .btn-edit:hover {
+        background: #1e88e5;
+        color: white;
+        transform: scale(1.1);
+    }
+
+.btn-delete {
+    background: #ffebee;
+    color: #e53935;
+}
+
+    .btn-delete:hover {
+        background: #e53935;
+        color: white;
+        transform: scale(1.1);
+    }
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    color: white;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 25px;
+}
+
+    .modal-header h5 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .modal-header .btn-close {
+        filter: brightness(0) invert(1);
+    }
+
+.modal-body {
+    padding: 30px 25px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 25px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+    .form-control:focus {
+        border-color: #1e88e5;
+        box-shadow: 0 0 0 0.2rem rgba(30, 136, 229, 0.15);
+    }
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .btn-secondary:hover {
+        background: #5a6268;
+    }
+
+.btn-success {
+    background: #43a047;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .btn-success:hover {
+        background: #388e3c;
+    }
+
+.btn-danger {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .btn-danger:hover {
+        background: #c62828;
+    }
+
+/* Delete Modal */
+.modal-delete .modal-header {
+    background: linear-gradient(135deg, #e53935, #c62828);
+}
+
+.delete-warning {
+    text-align: center;
+    padding: 20px;
+}
+
+    .delete-warning i {
+        font-size: 64px;
+        color: #e53935;
+        margin-bottom: 20px;
+    }
+
+    .delete-warning h5 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .delete-warning p {
+        color: #666;
+        margin: 0;
+    }
+
+.specialty-name {
+    font-weight: 600;
+    color: #1e88e5;
+}

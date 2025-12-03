@@ -1,0 +1,206 @@
+﻿@{
+    Layout = null;
+}
+@* ADICIONAR SEU MODELO AQUI: @model SeuProjeto.Models.UtenteRegistoViewModel *@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo de Utente | Sistema Hospitalar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJ87tFpWJofv8S4/kP1s0qP+T8B7JpP1fD2yM6N6G/MvL1x0TqQ2R+h0F0F0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Estilos Personalizados */
+        body {
+            /* Fundo Azul Claro */
+            background-color: #f0f8ff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            padding: 15px 0;
+        }
+
+        .register-card {
+            /* Cartão Branco com Sombra */
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            max-width: 700px;
+            width: 95%;
+            position: relative; /* Necessário para posicionar o X absoluto, se desejado */
+        }
+
+        /* NOVO ESTILO: Botão X discreto no topo */
+        .close-btn-top {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 1.5rem;
+            color: #6c757d; /* Cor cinza sutil */
+            transition: color 0.2s;
+            z-index: 10;
+        }
+
+            .close-btn-top:hover {
+                color: #dc3545; /* Cor vermelha ao passar o mouse */
+            }
+
+        /* O restante dos estilos... (omitido para brevidade, mas você deve manter o seu CSS original) */
+
+        h2 {
+            color: #0d6efd;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            font-weight: 600;
+        }
+
+        .text-primary i {
+            margin-right: 5px;
+            color: #0d6efd;
+        }
+
+        .my-compact-3 {
+            margin-top: 0.75rem !important;
+            margin-bottom: 0.75rem !important;
+        }
+
+        .my-compact-2 {
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .input-validation-error {
+            border: 1px solid #dc3545 !important;
+        }
+
+        .field-validation-error {
+            color: #dc3545;
+            font-size: 0.85em;
+            display: block;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-card">
+
+        <a asp-action="Index" asp-controller="Home" class="close-btn-top text-decoration-none" title="Fechar Formulário">
+            <i class="fa-solid fa-times">x</i>
+        </a>
+
+        <h2 class="text-center mb-3">✍️ Registo de Novo Utente</h2>
+        <p class="text-muted text-center mb-4">Preencha as suas credenciais e os dados pessoais.</p>
+
+        <form action="/api/registar-utente" method="POST">
+
+            <input type="hidden" name="tipoUtilizador" value="Utente">
+
+            <hr class="mb-3">
+
+            <h5 class="text-primary mb-2"><i class="fa-solid fa-lock"></i> Credenciais de Acesso</h5>
+            <div class="row mb-3 g-3">
+                <div class="col-12">
+                    <label for="emailAcesso" class="form-label">Email de Acesso (Login)</label>
+                    <input type="email" class="form-control" id="emailAcesso" name="emailAcesso" required placeholder="seu.email@exemplo.com">
+                    <span class="text-danger small"></span> <div class="form-text mt-1">Este email será a sua chave única de acesso ao sistema.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="palavraPasse" class="form-label">Palavra-Passe</label>
+                    <input type="password" class="form-control" id="palavraPasse" name="palavraPasse" required minlength="6" placeholder="Mínimo 6 caracteres">
+                    <span class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="confirmarPalavraPasse" class="form-label">Confirmar Palavra-Passe</label>
+                    <input type="password" class="form-control" id="confirmarPalavraPasse" name="confirmarPalavraPasse" required placeholder="Repita a palavra-passe">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <hr class="my-compact-3">
+
+            <h5 class="text-primary mb-2"><i class="fa-solid fa-address-card"></i> Dados Pessoais</h5>
+            <div class="row mb-3 g-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required minlength="2" placeholder="Nome do Utente">
+                    <span class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" required max="2025-12-01">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <h5 class="text-primary my-compact-2"><i class="fa-solid fa-phone"></i> Contacto</h5>
+            <div class="row mb-3 g-3">
+                <div class="col-md-6">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="+244 9XX XXX XXX">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <hr class="my-compact-3">
+
+            <h5 class="text-primary my-compact-2"><i class="fa-solid fa-location-dot"></i> Endereço</h5>
+            <div class="row mb-3 g-3">
+                <div class="col-12">
+                    <label for="morada" class="form-label">Morada Completa</label>
+                    <input type="text" class="form-control" id="morada" name="morada" placeholder="Rua, número e andar">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 g-3">
+                <div class="col-md-6">
+                    <label for="codigoPostal" class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" pattern="[0-9]{4}-[0-9]{3}" placeholder="0000-000">
+                    <div class="form-text mt-1">Formato esperado: 0000-000</div>
+                    <span class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="localidade" class="form-label">Localidade</label>
+                    <input type="text" class="form-control" id="localidade" name="localidade" placeholder="Cidade ou Vila">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <hr class="my-compact-3">
+
+            <h5 class="text-primary my-compact-2"><i class="fa-solid fa-hospital"></i> Informações Administrativas</h5>
+            <div class="row mb-4 g-3">
+                <div class="col-md-6">
+                    <label for="numeroUtente" class="form-label">Número de Utente</label>
+                    <input type="text" class="form-control" id="numeroUtente" name="numeroUtente" placeholder="Número de Identificação do Utente">
+                    <span class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label for="entidadeFinanciadora" class="form-label">Entidade Financiadora (Seguro)</label>
+                    <input type="text" class="form-control" id="entidadeFinanciadora" name="entidadeFinanciadora" placeholder="Ex: SNS, Médis, Multicare, etc.">
+                    <span class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="d-grid mb-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-user-plus"></i> Criar Conta Utente
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

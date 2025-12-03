@@ -1,0 +1,502 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Pagina incial";
+}
+
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital PDC.AO - Sistema de Informação de Saúde</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/index.css" />
+</head>
+<body>
+    <!-- Navbar Completo -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="#inicio">
+                <i class="bi bi-heart-pulse me-2"></i>Hospital PDC.AO
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active text-primary" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            Explorar
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#especialidades">Especialidades</a></li>
+                            <li><a class="dropdown-item" href="#medicos">Médicos</a></li>
+                            <li><a class="dropdown-item" href="#servicos">Serviços</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#contactos">Contactos</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex gap-2">
+                    <a asp-action="Login" asp-controller="Login" class="btn btn-outline-primary">Iniciar sessão</a>
+                    <a asp-action="CriarContaUtente" asp-controller="Login" class="btn btn-primary">Criar conta</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section bg-primary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold">Cuidados de Saúde de Excelência</h1>
+                    <p class="lead my-4">No Hospital PDC.AO, oferecemos serviços médicos de alta qualidade com tecnologia avançada e uma equipa de profissionais dedicados.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#especialidades" class="btn btn-light btn-lg">Nossas Especialidades</a>
+                        <a href="#servicos" class="btn btn-outline-light btn-lg">Nossos Serviços</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="bi bi-heart-pulse display-1 text-white"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Estatísticas -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-number">50+</div>
+                    <p class="mb-0">Especialidades</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-number">150+</div>
+                    <p class="mb-0">Médicos</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-number">24/7</div>
+                    <p class="mb-0">Urgências</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-number">98%</div>
+                    <p class="mb-0">Satisfação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidades -->
+    <section id="especialidades" class="section-padding">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-primary mb-3">Nossas Especialidades</h2>
+                    <p class="lead">Oferecemos uma ampla gama de especialidades médicas para cuidar da sua saúde em todas as fases da vida.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <h4 class="text-primary">Cardiologia</h4>
+                            <p class="text-muted">Cuidados especializados para o coração e sistema cardiovascular com equipamento de diagnóstico avançado.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-lungs"></i>
+                            </div>
+                            <h4 class="text-primary">Pneumologia</h4>
+                            <p class="text-muted">Diagnóstico e tratamento de doenças respiratórias com os mais modernos métodos de intervenção.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-eye"></i>
+                            </div>
+                            <h4 class="text-primary">Oftalmologia</h4>
+                            <p class="text-muted">Cuidados completos para a saúde ocular, desde consultas de rotina a cirurgias especializadas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-bandaid"></i>
+                            </div>
+                            <h4 class="text-primary">Ortopedia</h4>
+                            <p class="text-muted">Tratamento de problemas musculoesqueléticos, fraturas e lesões desportivas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-gender-ambiguous"></i>
+                            </div>
+                            <h4 class="text-primary">Pediatria</h4>
+                            <p class="text-muted">Cuidados especializados para crianças e adolescentes, com acompanhamento do desenvolvimento.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                            <h4 class="text-primary">Ginecologia</h4>
+                            <p class="text-muted">Acompanhamento da saúde feminina e cuidados pré-natais com equipa especializada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Médicos -->
+    <section id="medicos" class="section-padding bg-light-custom">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-primary mb-3">Nossa Equipa Médica</h2>
+                    <p class="lead">Contamos com profissionais altamente qualificados e experientes em diversas especialidades médicas.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 doctor-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-person-fill text-white fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-primary mb-0">Dr. João Silva</h5>
+                                    <p class="text-muted mb-0">Cardiologista</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">Especialista em cardiologia com 15 anos de experiência. Membro da Sociedade Portuguesa de Cardiologia.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Disponível</span>
+                                <small class="text-muted">10 anos de casa</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 doctor-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-person-fill text-white fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-primary mb-0">Dra. Maria Santos</h5>
+                                    <p class="text-muted mb-0">Pneumologista</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">Especialista em doenças respiratórias com 12 anos de experiência. Doutorada em Medicina Pulmonar.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Disponível</span>
+                                <small class="text-muted">8 anos de casa</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 doctor-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-person-fill text-white fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-primary mb-0">Dr. Carlos Ferreira</h5>
+                                    <p class="text-muted mb-0">Ortopedista</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">Especialista em cirurgia ortopédica e traumatologia com 10 anos de experiência. Membro da APT.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">Disponível</span>
+                                <small class="text-muted">6 anos de casa</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="section-padding">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-primary mb-3">Nossos Serviços</h2>
+                    <p class="lead">Oferecemos uma ampla gama de serviços médicos e exames complementares de diagnóstico.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-calendar-check text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Marcação de Consultas</h5>
+                            </div>
+                            <p class="text-muted">Marque consultas com especialistas de forma simples e rápida através do nosso sistema online.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-clipboard2-pulse text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Exames de Diagnóstico</h5>
+                            </div>
+                            <p class="text-muted">Realizamos diversos exames complementares de diagnóstico com tecnologia de ponta.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-file-medical text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Registo Clínico</h5>
+                            </div>
+                            <p class="text-muted">Aceda e atualize o seu registo clínico de forma segura e confidencial.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-telephone text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Telemedicina</h5>
+                            </div>
+                            <p class="text-muted">Consultas à distância com nossos especialistas através de videochamada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-ambulance text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Urgência 24h</h5>
+                            </div>
+                            <p class="text-muted">Serviço de urgência disponível 24 horas por dia, 7 dias por semana.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm card-hover h-100 service-card">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-prescription2 text-primary fs-3 me-3"></i>
+                                <h5 class="text-primary mb-0">Farmácia Hospitalar</h5>
+                            </div>
+                            <p class="text-muted">Dispensação de medicamentos com orientação farmacêutica especializada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Hospital -->
+    <section id="sobre" class="section-padding bg-light-custom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="text-primary mb-4">Sobre o Hospital PDC.AO</h2>
+                    <p class="lead mb-4">O Hospital PDC.AO é uma instituição de saúde de referência, comprometida com a excelência no atendimento e cuidados médicos.</p>
+                    <p class="mb-4">Fundado com a missão de fornecer serviços de saúde de qualidade acessíveis a todos, contamos com tecnologia de ponta e uma equipa multidisciplinar de profissionais altamente qualificados.</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="text-primary">500+</h4>
+                            <p class="text-muted mb-0">Profissionais</p>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-primary">50+</h4>
+                            <p class="text-muted mb-0">Especialidades</p>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <h4 class="text-primary">10+</h4>
+                            <p class="text-muted mb-0">Anos de Experiência</p>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <h4 class="text-primary">24/7</h4>
+                            <p class="text-muted mb-0">Atendimento</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="text-primary mb-4">Por que nos escolher?</h4>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="bi bi-shield-check text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Segurança de Dados</h6>
+                                    <p class="text-muted mb-0">Proteção total dos seus dados médicos com criptografia avançada.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="bi bi-clock text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Agilidade</h6>
+                                    <p class="text-muted mb-0">Processos otimizados para seu atendimento rápido e eficiente.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <i class="bi bi-star text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Qualidade</h6>
+                                    <p class="text-muted mb-0">Padrões internacionais de qualidade em todos os serviços.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-people text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Equipa Qualificada</h6>
+                                    <p class="text-muted mb-0">Profissionais com formação nacional e internacional.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contactos -->
+    <section id="contactos" class="section-padding">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-primary mb-3">Contactos</h2>
+                    <p class="lead">Estamos aqui para ajudar. Entre em contacto connosco.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-geo-alt text-primary display-6 mb-3"></i>
+                                    <h5>Morada</h5>
+                                    <p class="text-muted">Av. da Saúde, 123<br>1000-001 Lisboa</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-telephone text-primary display-6 mb-3"></i>
+                                    <h5>Telefone</h5>
+                                    <p class="text-muted">+351 21 123 4567<br>Urgência: 21 123 4568</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body p-4">
+                                    <i class="bi bi-envelope text-primary display-6 mb-3"></i>
+                                    <h5>Email</h5>
+                                    <p class="text-muted">geral@hospitalpdcao.pt<br>info@hospitalpdcao.pt</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-primary mb-3">Hospital PDC.AO</h4>
+                    <p class="text-light">Cuidados de saúde de excelência com tecnologia avançada e uma equipa de profissionais dedicados.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-linkedin fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 mb-4 mb-lg-0">
+                    <h5 class="text-primary mb-3">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#inicio" class="text-light text-decoration-none">Início</a></li>
+                        <li class="mb-2"><a href="#especialidades" class="text-light text-decoration-none">Especialidades</a></li>
+                        <li class="mb-2"><a href="#medicos" class="text-light text-decoration-none">Médicos</a></li>
+                        <li class="mb-2"><a href="#servicos" class="text-light text-decoration-none">Serviços</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+                    <h5 class="text-primary mb-3">Serviços</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Consultas</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Exames</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Urgência</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Cirurgia</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-primary mb-3">Horário</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="mb-2">Urgência: 24h/7d</li>
+                        <li class="mb-2">Consultas: 8h-20h</li>
+                        <li class="mb-2">Administração: 9h-18h</li>
+                        <li class="mb-2">Farmácia: 8h-22h</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Hospital PDC.AO. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Sistema de Informação de Saúde - SIS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

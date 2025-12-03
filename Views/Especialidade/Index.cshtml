@@ -1,0 +1,198 @@
+﻿@model SisPDC.Models.Entities.EspecialidadeModel
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Buscar pacientes, médicos, consultas...">
+        </div>
+        <div class="top-bar-actions">
+            <button class="notification-btn">
+                <i class="bi bi-bell"></i>
+                <span class="badge">5</span>
+            </button>
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=1e88e5&color=fff&size=100" alt="User">
+                <div>
+                    <div style="font-size: 14px; font-weight: 600;">Admin</div>
+                    <div style="font-size: 12px; color: #666;">Administrador</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <div class="stat-info">
+                    <h3>1,248</h3>
+                    <p>Total Pacientes</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+            </div>
+
+            <div class="stat-card green">
+                <div class="stat-info">
+                    <h3>156</h3>
+                    <p>Consultas Hoje</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="bi bi-calendar-check-fill"></i>
+                </div>
+            </div>
+
+            <div class="stat-card orange">
+                <div class="stat-info">
+                    <h3>89</h3>
+                    <p>Médicos Ativos</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="bi bi-person-badge-fill"></i>
+                </div>
+            </div>
+
+            <div class="stat-card red">
+                <div class="stat-info">
+                    <h3>23</h3>
+                    <p>Emergências</p>
+                </div>
+                <div class="stat-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h4>Consultas Mensais</h4>
+                <div class="chart-placeholder">
+                    <div class="chart-bars">
+                        <div class="bar" style="height: 60%;"></div>
+                        <div class="bar" style="height: 85%;"></div>
+                        <div class="bar" style="height: 45%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 55%;"></div>
+                        <div class="bar" style="height: 90%;"></div>
+                        <div class="bar" style="height: 65%;"></div>
+                        <div class="bar" style="height: 75%;"></div>
+                        <div class="bar" style="height: 50%;"></div>
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 95%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h4>Departamentos</h4>
+                <div style="padding: 20px 0;">
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-size: 14px; color: #666;">Cardiologia</span>
+                            <span style="font-weight: 600;">78%</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 8px; border-radius: 10px;">
+                            <div style="background: #1e88e5; width: 78%; height: 100%; border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-size: 14px; color: #666;">Pediatria</span>
+                            <span style="font-weight: 600;">65%</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 8px; border-radius: 10px;">
+                            <div style="background: #43a047; width: 65%; height: 100%; border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-size: 14px; color: #666;">Ortopedia</span>
+                            <span style="font-weight: 600;">52%</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 8px; border-radius: 10px;">
+                            <div style="background: #fb8c00; width: 52%; height: 100%; border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-size: 14px; color: #666;">Neurologia</span>
+                            <span style="font-weight: 600;">43%</span>
+                        </div>
+                        <div style="background: #e0e0e0; height: 8px; border-radius: 10px;">
+                            <div style="background: #e53935; width: 43%; height: 100%; border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments List -->
+        <div class="appointments-list">
+            <div class="appointments-header">
+                <h4>Consultas Recentes</h4>
+            </div>
+            <div class="appointment-item">
+                <div class="patient-info">
+                    <div class="patient-avatar">JD</div>
+                    <div class="patient-details">
+                        <h5>João Domingos</h5>
+                        <p>Dr. Silva • Cardiologia • 10:00 AM</p>
+                    </div>
+                </div>
+                <span class="appointment-status status-confirmed">Confirmado</span>
+            </div>
+            <div class="appointment-item">
+                <div class="patient-info">
+                    <div class="patient-avatar" style="background: linear-gradient(135deg, #43a047, #66bb6a);">MA</div>
+                    <div class="patient-details">
+                        <h5>Maria António</h5>
+                        <p>Dr. Costa • Pediatria • 11:30 AM</p>
+                    </div>
+                </div>
+                <span class="appointment-status status-pending">Pendente</span>
+            </div>
+            <div class="appointment-item">
+                <div class="patient-info">
+                    <div class="patient-avatar" style="background: linear-gradient(135deg, #fb8c00, #ffa726);">PF</div>
+                    <div class="patient-details">
+                        <h5>Paulo Francisco</h5>
+                        <p>Dr. Mendes • Ortopedia • 02:00 PM</p>
+                    </div>
+                </div>
+                <span class="appointment-status status-confirmed">Confirmado</span>
+            </div>
+            <div class="appointment-item">
+                <div class="patient-info">
+                    <div class="patient-avatar" style="background: linear-gradient(135deg, #e53935, #ef5350);">AS</div>
+                    <div class="patient-details">
+                        <h5>Ana Silva</h5>
+                        <p>Dr. Pereira • Neurologia • 03:30 PM</p>
+                    </div>
+                </div>
+                <span class="appointment-status status-cancelled">Cancelado</span>
+            </div>
+            <div class="appointment-item">
+                <div class="patient-info">
+                    <div class="patient-avatar" style="background: linear-gradient(135deg, #8e24aa, #ab47bc);">CM</div>
+                    <div class="patient-details">
+                        <h5>Carlos Manuel</h5>
+                        <p>Dr. Santos • Cardiologia • 04:00 PM</p>
+                    </div>
+                </div>
+                <span class="appointment-status status-confirmed">Confirmado</span>
+            </div>
+        </div>
+    </div>
+</div>
