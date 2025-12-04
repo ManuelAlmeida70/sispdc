@@ -13,6 +13,10 @@ public class UpdateEspecialidade : IUpdateEspecialidade
     }
     public async Task Execute(EspecialidadeModel especialidadeModel)
     {
-        await _especialidadeRepository.Update(especialidadeModel);
+        var especialidade = await _especialidadeRepository.GetById(especialidadeModel.Id);
+
+        especialidade.Descricao = especialidadeModel.Descricao;
+
+        await _especialidadeRepository.Update(especialidade);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SisPDC.Services.Especialidade.Add;
 using SisPDC.Services.Especialidade.DeleteById;
+using SisPDC.Services.Especialidade.GerarRelatorioExcel;
 using SisPDC.Services.Especialidade.GetAll;
 using SisPDC.Services.Especialidade.GetById;
 using SisPDC.Services.Especialidade.Update;
@@ -20,5 +21,6 @@ public static class DependencyInjectionServices
         services.AddScoped<IGetByIdEspecialidade, GetByIdEspecialidade>();
         services.AddScoped<IUpdateEspecialidade, UpdateEspecialidade>();
         services.AddScoped<IDeleteByIdEspecialidade, DeleteByIdEspecialidade>();
+        services.AddScoped<IGerarRelatorioExcel, GerarRelatorioExcel>();
     }
 }
