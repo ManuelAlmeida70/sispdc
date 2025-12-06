@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SisPDC.DTOs.UtenteDTO
+
+@{
     Layout = null;
 }
 @* ADICIONAR SEU MODELO AQUI: @model SeuProjeto.Models.UtenteRegistoViewModel *@
@@ -100,7 +102,7 @@
         <h2 class="text-center mb-3">✍️ Registo de Novo Utente</h2>
         <p class="text-muted text-center mb-4">Preencha as suas credenciais e os dados pessoais.</p>
 
-        <form action="/api/registar-utente" method="POST">
+        <form asp-action="CriarConta" asp-controller="Login" method="POST">
 
             <input type="hidden" name="tipoUtilizador" value="Utente">
 

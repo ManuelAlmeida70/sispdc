@@ -4,6 +4,8 @@ using SisPDC.Services.Especialidade.GerarRelatorioExcel;
 using SisPDC.Services.Especialidade.GetAll;
 using SisPDC.Services.Especialidade.GetById;
 using SisPDC.Services.Especialidade.Update;
+using SisPDC.Services.Utente.Add;
+using SisPDC.Services.Utilizador.VerifyEmail;
 
 namespace SisPDC.Services;
 
@@ -22,5 +24,13 @@ public static class DependencyInjectionServices
         services.AddScoped<IUpdateEspecialidade, UpdateEspecialidade>();
         services.AddScoped<IDeleteByIdEspecialidade, DeleteByIdEspecialidade>();
         services.AddScoped<IGerarRelatorioExcel, GerarRelatorioExcel>();
+
+
+        services.AddScoped<IAddUtente, AddUtente>();
+
+
+        services.AddScoped<IVerifyEmail, VerifyEmail>();
+
+
     }
 }

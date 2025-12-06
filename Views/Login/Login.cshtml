@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SisPDC.DTOs.UtilizadorDTO
+
+@{
     Layout = null;
 }
 
@@ -92,7 +94,16 @@
     <div class="login-card">
         <h2 class="text-center mb-4">🏥 Acesso ao Sistema</h2>
 
-        <form action="/login" method="POST">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show m-4" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form asp-action="IniciarSessao" asp-controller="Login" method="POST">
 
             <div class="mb-5 tipo-utilizador-container">
                 <label class="form-label d-block mb-3">**Entrar como:**</label>
@@ -100,37 +111,39 @@
                 <div class="row g-2 tipo-utilizador-radio">
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" name="tipoUtilizador" id="option_utente" value="utente" required onclick="toggleCreateAccountLink('show')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_utente" value="utente" onclick="toggleCreateAccountLink('show')">
                         <label class="btn w-100" for="option_utente">
                             <i class="fa-solid fa-user"></i> Utente
                         </label>
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" name="tipoUtilizador" id="option_medico" value="medico" required onclick="toggleCreateAccountLink('hide')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_medico" value="medico" onclick="toggleCreateAccountLink('hide')">
                         <label class="btn w-100" for="option_medico">
                             <i class="fa-solid fa-user-doctor"></i> Médico
                         </label>
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" name="tipoUtilizador" id="option_admin" value="administrativa" required onclick="toggleCreateAccountLink('hide')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_admin" value="administrativa" onclick="toggleCreateAccountLink('hide')">
                         <label class="btn w-100" for="option_admin">
                             <i class="fa-solid fa-gears"></i> Admin
                         </label>
                     </div>
-
+                    <span asp-validation-for="TipoUtilizador" class="text-danger text-center"></span>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Endereço de Email</label>
-                <input type="email" class="form-control" id="email" name="email" required placeholder="seu.email@exemplo.com">
+                <label for="email" class="form-label">Endereço de Email</label><br />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input type="email" class="form-control" id="email" asp-for="Email" placeholder="seu.email@exemplo.com">
             </div>
 
             <div class="mb-4">
-                <label for="password" class="form-label">Palavra-Passe</label>
-                <input type="password" class="form-control" id="password" name="password" required placeholder="••••••••">
+                <label for="password" class="form-label">Palavra-Passe</label><br />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input type="password" class="form-control" id="password" asp-for="Password" placeholder="••••••••">
             </div>
 
             <div class="password-links-container">
@@ -144,7 +157,7 @@
             </div>
 
             <div class="d-grid">
-                <a asp-action="IniciarSessao" asp-controller="Login" type="submit" class="btn btn-primary btn-lg">Iniciar sessão</a>
+                <button type="submit" class="btn btn-primary btn-lg">Iniciar sessão</button>
             </div>
 
         </form>
