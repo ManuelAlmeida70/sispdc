@@ -21,9 +21,9 @@ public class AddUtente : IAddUtente
     {
         try
         {
-            var emailExist = await _verifyEmail.Execute(utenteDTO.EmailAcesso!);
+            bool emailExist = await _verifyEmail.Execute(utenteDTO.EmailAcesso!);
 
-            if (emailExist) 
+            if (emailExist == true) 
             {
                 return null!;
             }
@@ -35,7 +35,7 @@ public class AddUtente : IAddUtente
                 Email = utenteDTO.EmailAcesso!,
                 PalavraPasse = HashPasswrod(),
                 PalavraPasseSalt = SaltPassword(),
-                TipoUtilizador = "utente",
+                TipoUtilizador = "Utente",
                 UltimoAcesso = DateTime.Now,
             };
 
@@ -54,8 +54,7 @@ public class AddUtente : IAddUtente
                 Morada = utenteDTO.Morada,
                 Nome = utenteDTO.Nome,
                 NumeroUtente = utenteDTO.NumeroUtente,
-                Telefone = utenteDTO.Telefone,
-                Utilizador = resultUtilizador
+                Telefone = utenteDTO.Telefone
             };
 
             var resultUtente = await _utenteRepository.Add(utente);
@@ -69,20 +68,20 @@ public class AddUtente : IAddUtente
         catch (Exception ex) 
         { 
             Console.WriteLine(ex.ToString());
+            return null!;
         }
-        throw new NotImplementedException();
     }
 
     private string HashPasswrod()
     {
-        string password  ="Senha";
+        string password  ="Senha8998";
 
         return password;
     }
 
     private string SaltPassword()
     {
-        string salt = "Salt";
+        string salt = "Salt8998";
 
         return salt;
     }

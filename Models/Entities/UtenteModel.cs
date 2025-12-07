@@ -1,7 +1,10 @@
-﻿namespace SisPDC.Models.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SisPDC.Models.Entities;
 
 public class UtenteModel
 {
+    [Key]
     public int IdUtente { get; set; }
     public int IdUtilizador { get; set; }
 
@@ -20,7 +23,4 @@ public class UtenteModel
     public string? EntidadeFinanciadora { get; set; }
     public string? NumeroUtente { get; set; }
     public bool Ativo { get; set; } = true;
-
-    // Relacionamento
-    public UtilizadorModel? Utilizador { get; set; }
 }

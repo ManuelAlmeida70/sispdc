@@ -46,7 +46,8 @@ public class UtenteDTO
     // CONTACTO
     // ========================================
 
-    [MaxLength(20, ErrorMessage = "O telefone não pode exceder 20 caracteres")]
+    [MinLength(9, ErrorMessage = "O telefone não pode ter menos 9 caracteres")]
+    [MaxLength(9, ErrorMessage = "O telefone não pode exceder 9 caracteres")]
     [RegularExpression(@"^[0-9+\s]+$", ErrorMessage = "O telefone deve conter apenas números, + e espaços")]
     [Display(Name = "Telefone")]
     public string Telefone { get; set; }
@@ -72,6 +73,7 @@ public class UtenteDTO
     // INFORMAÇÕES ADMINISTRATIVAS
     // ========================================
 
+    [Required(ErrorMessage = "O número é obrigatório")]
     [MaxLength(50, ErrorMessage = "O número de utente não pode exceder 50 caracteres")]
     [Display(Name = "Número de Utente")]
     public string? NumeroUtente { get; set; }

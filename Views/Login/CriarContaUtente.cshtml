@@ -3,10 +3,9 @@
 @{
     Layout = null;
 }
-@* ADICIONAR SEU MODELO AQUI: @model SeuProjeto.Models.UtenteRegistoViewModel *@
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,7 +101,16 @@
         <h2 class="text-center mb-3">✍️ Registo de Novo Utente</h2>
         <p class="text-muted text-center mb-4">Preencha as suas credenciais e os dados pessoais.</p>
 
-        <form asp-action="CriarConta" asp-controller="Login" method="POST">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show m-4" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form asp-action="CriarContaUtente" asp-controller="Login" method="POST">
 
             <input type="hidden" name="tipoUtilizador" value="Utente">
 
@@ -111,18 +119,21 @@
             <h5 class="text-primary mb-2"><i class="fa-solid fa-lock"></i> Credenciais de Acesso</h5>
             <div class="row mb-3 g-3">
                 <div class="col-12">
-                    <label for="emailAcesso" class="form-label">Email de Acesso (Login)</label>
-                    <input type="email" class="form-control" id="emailAcesso" name="emailAcesso" required placeholder="seu.email@exemplo.com">
+                    <span asp-validation-for="EmailAcesso" class="text-danger"></span><br/>
+                    <label asp-for="EmailAcesso" for="emailAcesso" class="form-label">Email de Acesso (Login)</label>
+                    <input asp-for="EmailAcesso" type="email" class="form-control" id="emailAcesso" placeholder="seu.email@exemplo.com">
                     <span class="text-danger small"></span> <div class="form-text mt-1">Este email será a sua chave única de acesso ao sistema.</div>
                 </div>
                 <div class="col-md-6">
-                    <label for="palavraPasse" class="form-label">Palavra-Passe</label>
-                    <input type="password" class="form-control" id="palavraPasse" name="palavraPasse" required minlength="6" placeholder="Mínimo 6 caracteres">
+                    <label asp-for="PalavraPasse" for="palavraPasse" class="form-label">Palavra-Passe</label><br/>
+                    <span asp-validation-for="PalavraPasse" class="text-danger"></span>
+                    <input asp-for="PalavraPasse" type="password" class="form-control" id="palavraPasse" minlength="6" placeholder="Mínimo 6 caracteres">
                     <span class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
-                    <label for="confirmarPalavraPasse" class="form-label">Confirmar Palavra-Passe</label>
-                    <input type="password" class="form-control" id="confirmarPalavraPasse" name="confirmarPalavraPasse" required placeholder="Repita a palavra-passe">
+                    <label asp-for="ConfirmarPalavraPasse" for="confirmarPalavraPasse" class="form-label">Confirmar Palavra-Passe</label><br/>
+                    <span asp-validation-for="ConfirmarPalavraPasse" class="text-danger"></span>
+                    <input asp-for="ConfirmarPalavraPasse" type="password" class="form-control" id="confirmarPalavraPasse" placeholder="Repita a palavra-passe">
                     <span class="text-danger small"></span>
                 </div>
             </div>
@@ -132,13 +143,15 @@
             <h5 class="text-primary mb-2"><i class="fa-solid fa-address-card"></i> Dados Pessoais</h5>
             <div class="row mb-3 g-3">
                 <div class="col-md-6">
-                    <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required minlength="2" placeholder="Nome do Utente">
+                    <label asp-for="Nome" for="nome" class="form-label">Nome Completo</label><br/>
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                    <input asp-for="Nome" type="text" class="form-control" id="nome" minlength="2" placeholder="Nome do Utente">
                     <span class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
-                    <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" required max="2025-12-01">
+                    <label asp-for="DataNascimento" for="dataNascimento" class="form-label">Data de Nascimento</label><br/>
+                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                    <input asp-for="DataNascimento" type="date" class="form-control" id="dataNascimento" max="2025-12-01">
                     <span class="text-danger small"></span>
                 </div>
             </div>
@@ -146,8 +159,9 @@
             <h5 class="text-primary my-compact-2"><i class="fa-solid fa-phone"></i> Contacto</h5>
             <div class="row mb-3 g-3">
                 <div class="col-md-6">
-                    <label for="telefone" class="form-label">Telefone</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="+244 9XX XXX XXX">
+                    <label asp-for="Telefone" for="telefone" class="form-label">Telefone</label><br/>
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                    <input asp-for="Telefone" type="tel" class="form-control" id="telefone" placeholder="+244 9XX XXX XXX">
                     <span class="text-danger small"></span>
                 </div>
             </div>
@@ -157,22 +171,25 @@
             <h5 class="text-primary my-compact-2"><i class="fa-solid fa-location-dot"></i> Endereço</h5>
             <div class="row mb-3 g-3">
                 <div class="col-12">
-                    <label for="morada" class="form-label">Morada Completa</label>
-                    <input type="text" class="form-control" id="morada" name="morada" placeholder="Rua, número e andar">
+                    <label asp-for="Morada" for="morada" class="form-label">Morada Completa</label><br/>
+                    <span asp-validation-for="Morada" class="text-danger"></span>
+                    <input asp-for="Morada" type="text" class="form-control" id="morada" placeholder="Rua, número e andar">
                     <span class="text-danger small"></span>
                 </div>
             </div>
 
             <div class="row mb-3 g-3">
                 <div class="col-md-6">
-                    <label for="codigoPostal" class="form-label">Código Postal</label>
-                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" pattern="[0-9]{4}-[0-9]{3}" placeholder="0000-000">
+                    <label asp-for="CodigoPostal" for="codigoPostal" class="form-label">Código Postal</label><br/>
+                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                    <input asp-for="CodigoPostal" type="text" class="form-control" id="codigoPostal" pattern="[0-9]{4}-[0-9]{3}" placeholder="0000-000">
                     <div class="form-text mt-1">Formato esperado: 0000-000</div>
                     <span class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
-                    <label for="localidade" class="form-label">Localidade</label>
-                    <input type="text" class="form-control" id="localidade" name="localidade" placeholder="Cidade ou Vila">
+                    <label asp-for="Localidade" for="localidade" class="form-label">Localidade</label><br/>
+                    <span asp-validation-for="Localidade"></span>
+                    <input asp-for="Localidade" type="text" class="form-control" id="localidade" placeholder="Cidade ou Vila">
                     <span class="text-danger small"></span>
                 </div>
             </div>
@@ -182,13 +199,15 @@
             <h5 class="text-primary my-compact-2"><i class="fa-solid fa-hospital"></i> Informações Administrativas</h5>
             <div class="row mb-4 g-3">
                 <div class="col-md-6">
-                    <label for="numeroUtente" class="form-label">Número de Utente</label>
-                    <input type="text" class="form-control" id="numeroUtente" name="numeroUtente" placeholder="Número de Identificação do Utente">
+                    <label asp-for="NumeroUtente" for="numeroUtente" class="form-label">Número de BI</label><br/>
+                    <span asp-validation-for="NumeroUtente" class="text-danger"></span>
+                    <input asp-for="NumeroUtente" type="text" class="form-control" id="numeroUtente" placeholder="Número de Identificação do Utente">
                     <span class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
-                    <label for="entidadeFinanciadora" class="form-label">Entidade Financiadora (Seguro)</label>
-                    <input type="text" class="form-control" id="entidadeFinanciadora" name="entidadeFinanciadora" placeholder="Ex: SNS, Médis, Multicare, etc.">
+                    <label asp-for="EntidadeFinanciadora" for="entidadeFinanciadora" class="form-label">Entidade Financiadora (Seguro)</label><br/>
+                    <span asp-validation-for="EntidadeFinanciadora" class="text-danger"></span>
+                    <input asp-for="EntidadeFinanciadora" type="text" class="form-control" id="entidadeFinanciadora" placeholder="Ex: SNS, Médis, Multicare, etc.">
                     <span class="text-danger small"></span>
                 </div>
             </div>

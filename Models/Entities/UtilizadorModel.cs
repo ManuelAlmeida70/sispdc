@@ -1,7 +1,10 @@
-﻿namespace SisPDC.Models.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SisPDC.Models.Entities;
 
 public class UtilizadorModel
 {
+    [Key]
     public int IdUtilizador { get; set; }
     public string Email { get; set; } = string.Empty;
     public string PalavraPasse { get; set; } = string.Empty;

@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SisPDC.DTOs;
 using SisPDC.Models.Entities;
+using SisPDC.Services.Utente.Add;
+using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
 public class LoginController : Controller
 {
     public IActionResult Login()
     {
-        TempData["ErrorMessage"] = "Palavra ou email errado!";
         return View();
     }
 
@@ -18,13 +19,20 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CriarContaUtente(UtenteDTO utenteDTO)
+    public async Task<IActionResult> CriarContaUtente(UtenteDTO utenteDTO, [FromServices] IAddUtente useCase)
     {
         if (ModelState.IsValid)
         {
-            
+            var utente = await useCase.Execute(utenteDTO);
+
+            if (utente != null)
+            {
+                return View("Login");
+            }
+            TempData["ErrorMessage"] = "Erro ao cadastrar conta, o email ja existe!";
         }
-        return View();
+        
+        return View(utenteDTO);
     }
 
     public IActionResult IniciarSessao(UtilizadorDTO utilizadorDTO)
