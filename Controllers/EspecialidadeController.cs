@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SisPDC.Models.Entities;
 using SisPDC.Services.Especialidade.Add;
@@ -10,6 +11,8 @@ using SisPDC.Services.Especialidade.Update;
 using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
+
+[Authorize(Roles = "PessoaAdministratica")]
 public class EspecialidadeController : Controller
 {
     public IActionResult Index()

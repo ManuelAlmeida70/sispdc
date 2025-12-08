@@ -2,7 +2,6 @@
 using SisPDC.Models.Entities;
 using SisPDC.Models.Repositories;
 using SisPDC.Services.CriptPassword;
-using SisPDC.Services.Utilizador.IniciarSessao;
 
 namespace SisPDC.Services.Utilizador.VerificarSessao;
 
@@ -10,13 +9,13 @@ public class VerificarSessao : IVerificarSessao
 {
     private readonly IUtilizadorRepository _utilizadorRepository;
     private readonly ICriptPassword _criptPassword;
-    private readonly IIniciarSessao _iniciarSessao;
+    
 
-    public VerificarSessao(IUtilizadorRepository utilizadorRepository, ICriptPassword criptPassword, IIniciarSessao iniciarSessao)
+    public VerificarSessao(IUtilizadorRepository utilizadorRepository, ICriptPassword criptPassword)
     {
         _utilizadorRepository = utilizadorRepository;
         _criptPassword = criptPassword;
-        _iniciarSessao = iniciarSessao;
+        
     }
     public async Task<ResponseModel<UtilizadorModel>> VerificarLogin(UtilizadorDTO utilizadorDTO)
     {
@@ -40,9 +39,9 @@ public class VerificarSessao : IVerificarSessao
                 return response;
             }
 
-            //Criar sessao
-            _iniciarSessao.CriarSessao(utilizador);
+            
             response.Message = "Sessao iniciada com sucesso";
+            response.Data = utilizador;
             return response;
 
         }

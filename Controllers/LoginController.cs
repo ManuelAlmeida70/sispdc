@@ -1,18 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using SisPDC.DTOs;
-using SisPDC.Models.Entities;
 using SisPDC.Services.Utente.Add;
 using SisPDC.Services.Utilizador.VerificarSessao;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
 public class LoginController : Controller
 {
     private readonly IVerificarSessao _verificarSessao;
+    
     public LoginController(IVerificarSessao verificarSessao)
     {
         _verificarSessao = verificarSessao;
+        
     }
 
     public IActionResult Login()
@@ -53,34 +55,55 @@ public class LoginController : Controller
 
     public async Task<IActionResult> IniciarSessao(UtilizadorDTO utilizadorDTO)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            var utilizador = await _verificarSessao.VerificarLogin(utilizadorDTO);
-
-            if (utilizador.Status)
-            {
-                TempData["SuccessMessage"] = utilizador.Message;
-                if (utilizadorDTO.TipoUtilizador!.Equals("Utente"))
-                {
-                    return RedirectToAction("Index", "HomeUtente");
-                }
-            }
-            else
-            {
-                TempData["ErrorMessage"] = utilizador.Message;
-                return View("Login", utilizadorDTO);
-            }
-
-                return View("Login", utilizadorDTO);
-        }
-        else
-        {
-            return RedirectToAction("Login");
+            return View("Login", utilizadorDTO);
         }
 
+        var result = await _verificarSessao.VerificarLogin(utilizadorDTO);
 
+        if (!result.Status)
+        {
+            TempData["ErrorMessage"] = result.Message;
+            return View("Login", utilizadorDTO);
+        }
 
-        return View("~/Views/HomeUtente/Index.cshtml");
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, result.Data.IdUtilizador.ToString()),
+            new Claim(ClaimTypes.Email, result.Data.Email),
+            new Claim(ClaimTypes.Role, result.Data.TipoUtilizador),
+            new Claim("DataCriacao", DateTime.Now.ToString())
+        };
+
+        var claimsIdentify = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        var authProperties = new AuthenticationProperties
+        {
+            IsPersistent = true,
+            ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8),
+            AllowRefresh = true
+        };
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentify),
+            authProperties);
+
+        TempData["SuccessMessage"] = result.Message;
+
+        return RedirectionBaseadoNoRole(result.Data.TipoUtilizador);
+       
+    }
+
+    
+    public async Task<IActionResult> TerminarSessao()
+    {
+        await HttpContext.SignOutAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme);
+
+        TempData["Successmessage"] = "Sessão encerrada com sucesso!";
+        return RedirectToAction("Login", "Login");
     }
 
 

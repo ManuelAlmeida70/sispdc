@@ -6,7 +6,6 @@ using SisPDC.Services.Especialidade.GetAll;
 using SisPDC.Services.Especialidade.GetById;
 using SisPDC.Services.Especialidade.Update;
 using SisPDC.Services.Utente.Add;
-using SisPDC.Services.Utilizador.IniciarSessao;
 using SisPDC.Services.Utilizador.VerificarSessao;
 using SisPDC.Services.Utilizador.VerifyEmail;
 
@@ -37,7 +36,7 @@ public static class DependencyInjectionServices
 
         services.AddScoped<IVerificarSessao, VerificarSessao>();
 
-        services.AddScoped<IIniciarSessao, IniciarSessao>();
+        
 
 
         services.AddScoped<ICriptPassword, CriptPassworded>();
