@@ -2,7 +2,6 @@
 
 using System.ComponentModel.DataAnnotations;
 
-// Renomeada para UtilizadorDTO (Data Transfer Object)
 public class UtilizadorDTO
 {
     // Corresponde ao campo name="tipoUtilizador"

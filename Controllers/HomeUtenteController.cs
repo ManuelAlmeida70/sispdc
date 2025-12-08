@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SisPDC.Controllers;
+
+[Authorize(Roles = "Utente")]
 public class HomeUtenteController : Controller
 {
     public IActionResult Index()

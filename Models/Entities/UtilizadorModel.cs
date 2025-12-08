@@ -7,8 +7,8 @@ public class UtilizadorModel
     [Key]
     public int IdUtilizador { get; set; }
     public string Email { get; set; } = string.Empty;
-    public string PalavraPasse { get; set; } = string.Empty;
-    public string PalavraPasseSalt { get; set; } = string.Empty;
+    public required byte[] PalavraPasse { get; set; }
+    public required byte[] PalavraPasseSalt { get; set; }
     public string TipoUtilizador { get; set; } = string.Empty;
     public DateTime DataCriacao { get; set; }
     public DateTime? UltimoAcesso { get; set; }

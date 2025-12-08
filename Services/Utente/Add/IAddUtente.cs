@@ -5,5 +5,5 @@ namespace SisPDC.Services.Utente.Add;
 
 public interface IAddUtente
 {
-    Task<UtenteModel> Execute(UtenteDTO UtenteDTO);
+    Task<ResponseModel<UtenteModel>> Execute(UtenteDTO UtenteDTO);
 }

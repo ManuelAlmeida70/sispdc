@@ -1,6 +1,7 @@
 ﻿using SisPDC.DTOs;
 using SisPDC.Models.Entities;
 using SisPDC.Models.Repositories;
+using SisPDC.Services.CriptPassword;
 using SisPDC.Services.Utilizador.VerifyEmail;
 
 namespace SisPDC.Services.Utente.Add;
@@ -10,31 +11,41 @@ public class AddUtente : IAddUtente
     private readonly IUtenteRepository _utenteRepository;
     private readonly IUtilizadorRepository _utilizadorRepository;
     private readonly IVerifyEmail _verifyEmail;
+    private readonly ICriptPassword _criptPassword;
 
-    public AddUtente(IUtilizadorRepository utilizadorRepository, IUtenteRepository utenteRepository, IVerifyEmail verifyEmail)
+    public AddUtente(IUtilizadorRepository utilizadorRepository, IUtenteRepository utenteRepository,
+        IVerifyEmail verifyEmail, ICriptPassword criptPassword)
     {
         _utilizadorRepository = utilizadorRepository;
         _utenteRepository = utenteRepository;
         _verifyEmail = verifyEmail;
+        _criptPassword = criptPassword;
     }
-    public async Task<UtenteModel> Execute(UtenteDTO utenteDTO)
+    public async Task<ResponseModel<UtenteModel>> Execute(UtenteDTO utenteDTO)
     {
+        ResponseModel<UtenteModel> response = new ResponseModel<UtenteModel>();
+
         try
         {
             bool emailExist = await _verifyEmail.Execute(utenteDTO.EmailAcesso!);
 
             if (emailExist == true) 
             {
-                return null!;
+                response.Status = false;
+                response.Message = "Email ja cadastrado!";
+                return response;
             }
+
+            utenteDTO.ConfirmarPalavraPasse = null;
+            _criptPassword.CreatePasswordHash(utenteDTO.PalavraPasse!, out byte[] PasswordHash, out byte[] PasswordSalt);
 
             var utilizador = new UtilizadorModel()
             {
                 Ativo = true,
                 DataCriacao = DateTime.Now,
                 Email = utenteDTO.EmailAcesso!,
-                PalavraPasse = HashPasswrod(),
-                PalavraPasseSalt = SaltPassword(),
+                PalavraPasse = PasswordHash,
+                PalavraPasseSalt = PasswordSalt,
                 TipoUtilizador = "Utente",
                 UltimoAcesso = DateTime.Now,
             };
@@ -61,28 +72,18 @@ public class AddUtente : IAddUtente
 
             if (resultUtente == null)
                 return null!;
-            
-            return resultUtente;
+
+
+
+            response.Message = "Conta cadastrada com sucesso!";
+            return response;
 
         }
         catch (Exception ex) 
         { 
-            Console.WriteLine(ex.ToString());
-            return null!;
+            response.Message = ex.Message;
+            response.Status = false;
+            return response;
         }
-    }
-
-    private string HashPasswrod()
-    {
-        string password  ="Senha8998";
-
-        return password;
-    }
-
-    private string SaltPassword()
-    {
-        string salt = "Salt8998";
-
-        return salt;
     }
 }

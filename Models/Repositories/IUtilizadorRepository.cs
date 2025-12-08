@@ -6,4 +6,6 @@ public interface IUtilizadorRepository
 {
     Task<UtilizadorModel> Add(UtilizadorModel utilizadorModel);
     Task<bool> EmailExist(string email);
+
+    Task<UtilizadorModel> GetUitlizadorByEmail(string? email);
 }

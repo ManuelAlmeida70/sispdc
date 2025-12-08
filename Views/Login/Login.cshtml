@@ -103,6 +103,15 @@
             </div>
         }
 
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <form asp-action="IniciarSessao" asp-controller="Login" method="POST">
 
             <div class="mb-5 tipo-utilizador-container">
@@ -111,21 +120,21 @@
                 <div class="row g-2 tipo-utilizador-radio">
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_utente" value="utente" onclick="toggleCreateAccountLink('show')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_utente" value="Utente" onclick="toggleCreateAccountLink('show')">
                         <label class="btn w-100" for="option_utente">
                             <i class="fa-solid fa-user"></i> Utente
                         </label>
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_medico" value="medico" onclick="toggleCreateAccountLink('hide')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_medico" value="Medico" onclick="toggleCreateAccountLink('hide')">
                         <label class="btn w-100" for="option_medico">
                             <i class="fa-solid fa-user-doctor"></i> Médico
                         </label>
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_admin" value="administrativa" onclick="toggleCreateAccountLink('hide')">
+                        <input type="radio" class="btn-check" asp-for="TipoUtilizador" id="option_admin" value="Administrativa" onclick="toggleCreateAccountLink('hide')">
                         <label class="btn w-100" for="option_admin">
                             <i class="fa-solid fa-gears"></i> Admin
                         </label>

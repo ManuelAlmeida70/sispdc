@@ -25,4 +25,11 @@ public class UtilizadorRepository : IUtilizadorRepository
 
         return result;
     }
+
+    public Task<UtilizadorModel> GetUitlizadorByEmail(string? email)
+    {
+        var result = _dbSisPdcContext.Utilizadores.FirstOrDefaultAsync(x => x.Email == email);
+
+        return result!;
+    }
 }
