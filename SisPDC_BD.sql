@@ -31,6 +31,7 @@ CREATE TABLE especialidades (
 -- Tabela principal de autenticação
 CREATE TABLE utilizadores (
     idUtilizador INT AUTO_INCREMENT,
+	nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     palavraPasse VARBINARY(255) NOT NULL,
     palavraPasseSalt VARBINARY(255) NOT Null,
@@ -55,7 +56,6 @@ CREATE TABLE utentes (
     idUtente INT AUTO_INCREMENT,
     idUtilizador INT NOT NULL,
     
-    nome VARCHAR(100) NOT NULL,
     dataNascimento DATE NOT NULL,
     telefone VARCHAR(20) NULL,
     email VARCHAR(100) NULL,

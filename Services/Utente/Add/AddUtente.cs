@@ -43,6 +43,7 @@ public class AddUtente : IAddUtente
             {
                 Ativo = true,
                 DataCriacao = DateTime.Now,
+                Nome = utenteDTO.Nome,
                 Email = utenteDTO.EmailAcesso!,
                 PalavraPasse = PasswordHash,
                 PalavraPasseSalt = PasswordSalt,
@@ -63,7 +64,6 @@ public class AddUtente : IAddUtente
                 IdUtilizador = utilizador.IdUtilizador,
                 Localidade = utenteDTO.Localidade,
                 Morada = utenteDTO.Morada,
-                Nome = utenteDTO.Nome,
                 NumeroUtente = utenteDTO.NumeroUtente,
                 Telefone = utenteDTO.Telefone
             };

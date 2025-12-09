@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
 
-[Authorize(Roles = "PessoaAdministratica")]
+//[Authorize(Roles = "PessoaAdministratica")]
 public class EspecialidadeController : Controller
 {
     public IActionResult Index()

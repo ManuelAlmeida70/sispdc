@@ -9,7 +9,6 @@ public class UtenteModel
     public int IdUtilizador { get; set; }
 
     // Dados Pessoais
-    public string Nome { get; set; } = string.Empty;
     public DateTime DataNascimento { get; set; }
     public string? Telefone { get; set; }
     public string? Email { get; set; }

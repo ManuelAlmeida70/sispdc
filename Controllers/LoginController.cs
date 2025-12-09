@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SisPDC.DTOs;
 using SisPDC.Services.Utente.Add;
@@ -17,6 +18,7 @@ public class LoginController : Controller
         
     }
 
+    [AllowAnonymous]
     public IActionResult Login()
     {
         if (User.Identity?.IsAuthenticated == true)
@@ -53,6 +55,8 @@ public class LoginController : Controller
         return View(utenteDTO);
     }
 
+
+    [HttpPost]
     public async Task<IActionResult> IniciarSessao(UtilizadorDTO utilizadorDTO)
     {
         if (!ModelState.IsValid)
@@ -70,6 +74,7 @@ public class LoginController : Controller
 
         var claims = new List<Claim>
         {
+            new Claim(ClaimTypes.Name, result.Data.Nome),
             new Claim(ClaimTypes.NameIdentifier, result.Data.IdUtilizador.ToString()),
             new Claim(ClaimTypes.Email, result.Data.Email),
             new Claim(ClaimTypes.Role, result.Data.TipoUtilizador),

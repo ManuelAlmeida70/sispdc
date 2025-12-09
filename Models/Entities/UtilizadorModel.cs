@@ -6,6 +6,7 @@ public class UtilizadorModel
 {
     [Key]
     public int IdUtilizador { get; set; }
+    public string Nome { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public required byte[] PalavraPasse { get; set; }
     public required byte[] PalavraPasseSalt { get; set; }
