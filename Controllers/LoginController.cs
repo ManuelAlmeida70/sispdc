@@ -18,7 +18,6 @@ public class LoginController : Controller
         
     }
 
-    [AllowAnonymous]
     public IActionResult Login()
     {
         if (User.Identity?.IsAuthenticated == true)
