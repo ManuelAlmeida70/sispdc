@@ -5,7 +5,9 @@ namespace SisPDC.Models.Entities;
 public class UtenteModel
 {
     [Key]
-    public int IdUtente { get; set; }
+    [Required]
+    [RegularExpression(@"^UT\d{4}\d{6}$", ErrorMessage = "Formato invalidado")]
+    public string IdUtente { get; set; }
     public int IdUtilizador { get; set; }
 
     // Dados Pessoais

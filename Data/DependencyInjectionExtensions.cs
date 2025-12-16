@@ -17,6 +17,7 @@ public static class DependencyInjectionExtensions
         services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
         services.AddScoped<IUtenteRepository, UtenteRepository>();
         services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
+        services.AddScoped<IPessoaClinicaRepository, PessoaClinicaRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

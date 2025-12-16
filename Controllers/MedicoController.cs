@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SisPDC.DTOs;
 
 namespace SisPDC.Controllers;
 public class MedicoController : Controller
@@ -8,6 +9,7 @@ public class MedicoController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult Cadastrar()
     {
         return View();
@@ -21,5 +23,14 @@ public class MedicoController : Controller
         return View();
     }
 
-
+    [HttpPost]
+    public IActionResult Cadastrar(PessoaClinicoDTO pessoaClinicoDTO)
+    {
+        if (ModelState.IsValid)
+        {
+            // Lógica para salvar os dados do médico
+            return RedirectToAction("Listar", "Medico");
+        }
+        return View(pessoaClinicoDTO);
+    }
 }

@@ -2,6 +2,7 @@
 
 @{
     var IdUtilizador = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var NumeroUtente = User.FindFirst("NumeroUtente")?.Value;
     var tipoUtilizador = User.FindFirst(ClaimTypes.Role)?.Value ?? "Utente";
     var email = User.FindFirst(ClaimTypes.Email)?.Value ?? "";
     var nome = User.FindFirst(ClaimTypes.Name)?.Value ?? "";
@@ -150,7 +151,7 @@
             <div class="collapse navbar-collapse" id="navbarUser">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Início</a>
+                        <a class="nav-link active" asp-action="Index" asp-controller="HomeUtente"><i class="bi bi-house-door me-1"></i> Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-calendar-check me-1"></i> Minhas Consultas</a>
@@ -199,7 +200,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <h2 class="mb-2">Bem-vindo, @nome</h2>
-                    <p class="mb-0 opacity-75">Número de Utente: UT2024001234</p>
+                    <p class="mb-0 opacity-75">Número de Utente: @NumeroUtente</p>
                 </div>
                 <div class="col-md-4 text-md-end mt-3 mt-md-0">
                     <p class="mb-1"><i class="bi bi-calendar3 me-2"></i>Hoje: @DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"))</p>
@@ -212,8 +213,11 @@
 
     @RenderBody()
 
+
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 

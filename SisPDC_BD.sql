@@ -41,6 +41,7 @@ CREATE TABLE utilizadores (
     ativo BIT DEFAULT 1,
 
     CONSTRAINT PK_Utilizador PRIMARY KEY (idUtilizador),
+    CONSTRAINT CHK_Utilizador_Nome CHECK (LENGTH(nome) >= 2),
     CONSTRAINT UQ_Utilizador_Email UNIQUE (email),
     CONSTRAINT CHK_Utilizador_Email CHECK (email LIKE '%_@__%.__%'),
     CONSTRAINT CHK_Utilizador_Password CHECK (LENGTH(palavraPasse) >= 6),
@@ -53,7 +54,7 @@ CREATE TABLE utilizadores (
 
 -- Utentes (pacientes)
 CREATE TABLE utentes (
-    idUtente INT AUTO_INCREMENT,
+    idUtente NVARCHAR(15),
     idUtilizador INT NOT NULL,
     
     dataNascimento DATE NOT NULL,
@@ -76,7 +77,6 @@ CREATE TABLE utentes (
     CONSTRAINT UQ_Utente_Utilizador UNIQUE (idUtilizador),
     
     -- Validações corrigidas
-    CONSTRAINT CHK_Utente_Nome CHECK (LENGTH(nome) >= 2),
     CONSTRAINT CHK_Utente_Email CHECK (email IS NULL OR email LIKE '%_@__%.__%'),
     CONSTRAINT CHK_Utente_Telefone CHECK (telefone IS NULL OR telefone REGEXP '^[0-9+]+$'),
     CONSTRAINT CHK_Utente_CodigoPostal CHECK (codigoPostal IS NULL OR codigoPostal REGEXP '^[0-9]{4}-[0-9]{3}$')
@@ -85,7 +85,7 @@ CREATE TABLE utentes (
 
 -- Pessoal Administrativo
 CREATE TABLE PessoalAdministrativo (
-    idPessoalAdmin INT AUTO_INCREMENT,
+    idPessoalAdmin NVARCHAR(15),
     idUtilizador INT NOT NULL,
     
     nome VARCHAR(100) NOT NULL,
@@ -103,17 +103,55 @@ CREATE TABLE PessoalAdministrativo (
 
     CONSTRAINT PK_PessoalAdministrativo PRIMARY KEY (idPessoalAdmin),
     CONSTRAINT FK_PessoalAdministrativo_Utilizador FOREIGN KEY (idUtilizador) 
-        REFERENCES Utilizador(idUtilizador),
+        REFERENCES Utilizadores(idUtilizador),
     
     CONSTRAINT UQ_PessoalAdministrativo_Utilizador UNIQUE (idUtilizador),
     CONSTRAINT UQ_PessoalAdministrativo_Email UNIQUE (email),
     
     -- Validações
-    CONSTRAINT CHK_PessoalAdministrativo_Nome CHECK (LEN(nome) >= 2),
+    CONSTRAINT CHK_PessoalAdministrativo_Nome CHECK (LENGTH(nome) >= 2),
     CONSTRAINT CHK_PessoalAdministrativo_Email CHECK (email LIKE '%_@__%.__%'),
     CONSTRAINT CHK_PessoalAdministrativo_Telefone CHECK (telefone IS NULL OR telefone NOT LIKE '%[^0-9+]%'),
-    CONSTRAINT CHK_PessoalAdministrativo_DataAdmissao CHECK (dataAdmissao IS NULL OR dataAdmissao <= GETDATE())
+    CONSTRAINT CHK_PessoalAdministrativo_DataAdmissao CHECK (dataAdmissao IS NULL)
 );
+
+
+CREATE TABLE PessoaClinico (
+    idPessoaClinico NVARCHAR(15),
+    idUtilizador INT NOT NULL,
+    idEspecialidade INT NOT NULL,
+    
+    nome NVARCHAR(100) NOT NULL,
+    dataNascimento DATE NOT NULL,
+    dataAdmissao DATE NOT NULL,
+    telefone NVARCHAR(20) NOT NULL,
+    email NVARCHAR(100) NOT NULL,
+    cargo NVARCHAR(50) NULL,
+    numeroCedula NVARCHAR(50) NULL, -- Número de cédula profissional
+    
+    -- Endereço
+    morada VARCHAR(150) NULL,
+    codigoPostal VARCHAR(20) NULL,
+    localidade VARCHAR(80) NULL,
+    
+    ativo BIT DEFAULT 1,
+
+    CONSTRAINT PK_PessoaClinico PRIMARY KEY (idPessoaClinico),
+    CONSTRAINT FK_PessoaClinico_Utilizador FOREIGN KEY (idUtilizador) 
+        REFERENCES Utilizadores(idUtilizador),
+    CONSTRAINT FK_PessoaClinico_Especialidade FOREIGN KEY (idEspecialidade) 
+        REFERENCES Especialidades(Id),
+    
+    CONSTRAINT UQ_PessoalClinico_Utilizador UNIQUE (idUtilizador),
+    CONSTRAINT UQ_PessoalClinico_Email UNIQUE (email),
+    
+    -- Validações
+    CONSTRAINT CHK_PessoaClinico_Nome CHECK (LENGTH(nome) >= 2),
+    CONSTRAINT CHK_PessoaClinico_Email CHECK (email LIKE '%_@__%.__%'),
+    CONSTRAINT CHK_PessoaClinico_Telefone CHECK (telefone NOT LIKE '%[^0-9+]%'),
+    CONSTRAINT CHK_PessoaClinico_CodigoPostal CHECK (codigoPostal IS NULL OR codigoPostal LIKE '[0-9][0-9][0-9][0-9]-%')
+);
+
 
 
 
@@ -122,10 +160,10 @@ CREATE TABLE PessoalAdministrativo (
 -- ========================================
 SELECT * FROM utentes;
 SELECT * FROM utilizadores;
+SELECT * FROM PessoaAdministrativo;
+SELECT * FROM PessoaClinico;
 
 DROP TABLE utentes;
 DROP TABLE utilizadores;
-
-DELETE FROM utilizadores
-WHERE idUtilizador = '1';
-SELECT * FROM utentes;
+DROP TABLE PessoalAdministrativo;
+DROP TABLE PessoaClinico;

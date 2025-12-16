@@ -10,4 +10,8 @@ public class HomeUtenteController : Controller
     {
         return View();
     }
+    public IActionResult MarcarConsultaUtente()
+    {
+        return View("~/Views/MarcarConsultaUtente/MarcarConsultaUtente.cshtml");
+    }
 }

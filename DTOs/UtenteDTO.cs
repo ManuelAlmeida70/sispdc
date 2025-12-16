@@ -35,7 +35,7 @@ public class UtenteDTO
     [MinLength(2, ErrorMessage = "O nome deve ter no mínimo 2 caracteres")]
     [MaxLength(100, ErrorMessage = "O nome não pode exceder 100 caracteres")]
     [Display(Name = "Nome Completo")]
-    public string Nome { get; set; }
+    public string Nome { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "A data de nascimento é obrigatória")]
     [DataType(DataType.Date)]

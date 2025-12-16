@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SisPDC.DTOs;
 using SisPDC.Services.Utente.Add;
+using SisPDC.Services.Utente.GetUtenteNumero;
 using SisPDC.Services.Utilizador.VerificarSessao;
 using System.Security.Claims;
 
@@ -11,11 +12,12 @@ namespace SisPDC.Controllers;
 public class LoginController : Controller
 {
     private readonly IVerificarSessao _verificarSessao;
+    private readonly IGetUtenteNumero _getUtenteNumero;
     
-    public LoginController(IVerificarSessao verificarSessao)
+    public LoginController(IVerificarSessao verificarSessao, IGetUtenteNumero getUtenteNumero)
     {
         _verificarSessao = verificarSessao;
-        
+        _getUtenteNumero = getUtenteNumero;
     }
 
     public IActionResult Login()
@@ -65,6 +67,13 @@ public class LoginController : Controller
 
         var result = await _verificarSessao.VerificarLogin(utilizadorDTO);
 
+        if (!result.Status || result.Data == null)
+        {
+            TempData["ErrorMessage"] = result.Message;
+            return View("Login", utilizadorDTO);
+        }
+        var numeroUtente = await _getUtenteNumero.GetUtenteNumeroAsync(result.Data.Email);
+
         if (!result.Status)
         {
             TempData["ErrorMessage"] = result.Message;
@@ -74,6 +83,7 @@ public class LoginController : Controller
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, result.Data.Nome),
+            new Claim("NumeroUtente", numeroUtente),
             new Claim(ClaimTypes.NameIdentifier, result.Data.IdUtilizador.ToString()),
             new Claim(ClaimTypes.Email, result.Data.Email),
             new Claim(ClaimTypes.Role, result.Data.TipoUtilizador),

@@ -13,4 +13,6 @@ public class DbSisPdcContext : DbContext
     public DbSet<EspecialidadeModel> Especialidades { get; set; }
     public DbSet<UtilizadorModel> Utilizadores { get; set; }
     public  DbSet<UtenteModel> Utentes { get; set; }
+    public  DbSet<PessoaAdministrativaModel> PessoaAdministrativas { get; set; }
+    public  DbSet<PessoaClinicaModel> PessoaClinicas { get; set; }
 }
