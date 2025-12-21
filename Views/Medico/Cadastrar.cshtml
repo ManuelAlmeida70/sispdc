@@ -79,10 +79,10 @@
                         @* idEspecialidade (Dropdown) *@
                         <div class="col-md-6">
                             <label asp-for="IdEspecialidade" for="IdEspecialidade" class="form-label">Especialidade</label>
-                            @* Dropdown Simulado: Usa listaEspecialidadesExemplo *@
-                            <select name="IdEspecialidade" id="IdEspecialidade" class="form-select">
+                            <select asp-for="IdEspecialidade"
+                                    asp-items="ViewBag.Especialidades"
+                                    class="form-select">
                                 <option value="">Selecione a Especialidade</option>
-                                <option value="">Farmacia</option>
                             </select>
                             <span class="text-danger"></span>
                         </div>

@@ -19,6 +19,13 @@ public class UtilizadorRepository : IUtilizadorRepository
         return result.Entity;
     }
 
+    public async Task Eliminar(UtilizadorModel utilizadorModel)
+    {
+        _dbSisPdcContext.Remove(utilizadorModel);
+
+        await _dbSisPdcContext.SaveChangesAsync();
+    }
+
     public async Task<bool> EmailExist(string email)
     {
         var result = await _dbSisPdcContext.Utilizadores.AnyAsync(x => x.Email == email);
@@ -31,5 +38,18 @@ public class UtilizadorRepository : IUtilizadorRepository
         var result = _dbSisPdcContext.Utilizadores.FirstOrDefaultAsync(x => x.Email == email);
 
         return result!;
+    }
+
+    public async Task<bool> EliminarById(int id)
+    {
+        var utilizador = await _dbSisPdcContext.Utilizadores
+            .FirstOrDefaultAsync(x => x.IdUtilizador == id);
+
+        if (utilizador == null)
+            return false; // Retorna false se não encontrar
+
+        _dbSisPdcContext.Remove(utilizador);
+        await _dbSisPdcContext.SaveChangesAsync();
+        return true; // Retorna true se eliminou com sucesso
     }
 }

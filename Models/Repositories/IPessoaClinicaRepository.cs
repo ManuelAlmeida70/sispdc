@@ -4,5 +4,8 @@ namespace SisPDC.Models.Repositories;
 
 public interface IPessoaClinicaRepository
 {
-    Task<PessoaAdministrativaModel> Add(PessoaAdministrativaModel model);
+    Task<PessoaClinicaModel> Add(PessoaClinicaModel model);
+    Task<List<PessoaClinicaModel>> GetAll();
+    Task<PessoaClinicaModel> GetByIdMedicos(string? id);
+    Task EliminarByIdMedico(PessoaClinicaModel pessoaClinicaModel);
 }

@@ -1,4 +1,6 @@
-﻿using SisPDC.Services.CriptPassword;
+﻿using SisPDC.Data.Repositories;
+using SisPDC.Models.Repositories;
+using SisPDC.Services.CriptPassword;
 using SisPDC.Services.Especialidade.Add;
 using SisPDC.Services.Especialidade.DeleteById;
 using SisPDC.Services.Especialidade.GerarRelatorioExcel;
@@ -6,7 +8,10 @@ using SisPDC.Services.Especialidade.GetAll;
 using SisPDC.Services.Especialidade.GetById;
 using SisPDC.Services.Especialidade.Update;
 using SisPDC.Services.Medico.Add;
+using SisPDC.Services.Medico.EliminarById;
 using SisPDC.Services.Medico.GerarNumeroMedico;
+using SisPDC.Services.Medico.GetAll;
+using SisPDC.Services.Medico.GetById;
 using SisPDC.Services.Utente.Add;
 using SisPDC.Services.Utente.GerarNumeroUtente;
 using SisPDC.Services.Utente.GetUtenteNumero;
@@ -24,6 +29,10 @@ public static class DependencyInjectionServices
 
     public static void AddUseCases(IServiceCollection services)
     {
+        //Repositories
+        services.AddScoped<IPessoaClinicaRepository, PessoaClinicaRepository>();
+        services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
+
         //Scoped
         services.AddScoped<IAddEspecialidade, AddEspecialidade>();
         services.AddScoped<IGetAllEspecialidade, GetAllEspecialidade>();
@@ -44,6 +53,9 @@ public static class DependencyInjectionServices
         //Medico
         services.AddScoped<IGerarNumeroMedico, GerarNumeroMedico>();
         services.AddScoped<IAddMedico, AddMedico>();
+        services.AddScoped<IGetAllMedicos, GetAllMedicos>();
+        services.AddScoped<IGetByIdMedico, GetByIdMedico>();
+        services.AddScoped<IEliminarByIdMedico, EliminarByIdMedico>();
 
 
         services.AddScoped<ICriptPassword, CriptPassworded>();

@@ -33,7 +33,7 @@ public class AddMedico : IAddMedico
         {
             bool emailExist = await _verifyEmail.Execute(pessoaClinicoDTO.EmailAcesso!);
 
-            if (emailExist is false)
+            if (emailExist)
             {
                 response.Message = "O email informado ja existe";
                 response.Status = false;
@@ -49,7 +49,9 @@ public class AddMedico : IAddMedico
                 Email = pessoaClinicoDTO.EmailAcesso!,
                 UltimoAcesso = DateTime.Now,
                 PalavraPasse = PasswordHash,
-                PalavraPasseSalt = PasswordSalt
+                PalavraPasseSalt = PasswordSalt,
+                Nome = pessoaClinicoDTO.Nome,
+                TipoUtilizador = "Clinico"
             };
             
             var resultUtilizador = await _utilizadorRepository.Add(utilizador);
@@ -58,6 +60,7 @@ public class AddMedico : IAddMedico
 
             var medico = new PessoaClinicaModel()
             {
+                IdPessoaClinica = numeroMedico,
                 Ativo = 1,
                 Email = pessoaClinicoDTO.EmailAcesso!,
                 Cargo = pessoaClinicoDTO.Cargo,
@@ -66,9 +69,14 @@ public class AddMedico : IAddMedico
                 Localidade = pessoaClinicoDTO.Localidade,
                 Telefone = pessoaClinicoDTO.Telefone,
                 Nome = pessoaClinicoDTO.Nome,
-                IdUtilizadir = resultUtilizador.IdUtilizador,
-                DataNascimento = pessoaClinicoDTO.DataNascimento
+                IdUtilizador = resultUtilizador.IdUtilizador,
+                DataNascimento = pessoaClinicoDTO.DataNascimento,
+                IdEspecialidade = pessoaClinicoDTO.IdEspecialidade,
+                Morada = pessoaClinicoDTO.Morada,
+                NumeroCedula = pessoaClinicoDTO.NumeroCedula!
             };
+
+            var resultpessoa = await _pessoaClinicaRepository.Add(medico);
 
             response.Data = medico;
             return response;

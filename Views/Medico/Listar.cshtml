@@ -1,17 +1,9 @@
-﻿@model List<dynamic>
+﻿@model List<SisPDC.Models.Entities.PessoaClinicaModel>
 
 
 @{
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Listar Médicos";
-
-    var PessoalClinicoExemplo = new List<dynamic>
-    {
-       
-    };
-
-    // DECISÃO: Usar dados de EXEMPLO se o Model vindo do Controller for NULL ou VAZIO
-    var listaAExibir = (Model != null && Model.Any()) ? Model : PessoalClinicoExemplo;
 }
 
 @section Styles {
@@ -29,6 +21,14 @@
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle me-2"></i>
             @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>
+            @TempData["ErrorMessage"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
@@ -54,23 +54,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @* Agora iteramos sobre a variável 'listaAExibir' em vez de 'Model' *@
-                    @if (listaAExibir != null && listaAExibir.Any())
+                    @* Agora iteramos sobre o'Model' *@
+                    @if (Model.Any() && Model != null)
                     {
-                        foreach (var pessoa in listaAExibir)
+                        foreach (var pessoa in Model)
                         {
                             <tr>
-                                <td>#@pessoa.IdPessoalClinico.ToString("D4")</td>
+                                <td>@pessoa.IdPessoaClinica</td>
                                 <td>
                                     <strong>@pessoa.Nome</strong>
                                     <br>
                                     <small class="text-muted">@pessoa.Email</small>
                                 </td>
                                 <td>@pessoa.Cargo</td>
-                                <td>@pessoa.EspecialidadeNome</td>
+                                <td>@pessoa.IdEspecialidade</td>
                                 <td>@pessoa.Telefone</td>
                                 <td>
-                                    @if (pessoa.Ativo)
+                                    @if (pessoa.Ativo == 1)
                                     {
                                         <span class="badge bg-success"><i class="bi bi-check-circle-fill"></i> Sim</span>
                                     }
@@ -82,12 +82,12 @@
                                 <td>
                                     <div class="action-buttons">
                                         <a asp-action="Editar" asp-controller="Medico"
-                                                                 asp-route-id="@pessoa.IdPessoalClinico" class="btn-action btn-edit" title="Editar">
+                                                                 asp-route-id="@pessoa.IdPessoaClinica" class="btn-action btn-edit" title="Editar">
                                             <i class="bi bi-pencil-fill"></i>
                                         </a>
                                         <a asp-action="Eliminar"
                                                                  asp-controller="Medico"
-                                                                 asp-route-id="@pessoa.IdPessoalClinico"
+                                                                 asp-route-id="@pessoa.IdPessoaClinica"
                                                                  class="btn-action btn-delete" title="Eliminar">
                                             <i class="bi bi-trash-fill"></i>
                                         </a>

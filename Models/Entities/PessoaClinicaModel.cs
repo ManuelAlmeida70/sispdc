@@ -9,7 +9,7 @@ public class PessoaClinicaModel
     [RegularExpression(@"^UT\d{4}\d{6}$", ErrorMessage = "Formato invalidado do pessoa administrativa codigo")]
     public string IdPessoaClinica { get; set; } = string.Empty;
 
-    public int IdUtilizadir { get; set; }
+    public int IdUtilizador { get; set; }
     public string Nome { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
@@ -20,4 +20,6 @@ public class PessoaClinicaModel
     public string CodigoPostal { get; set; } = string.Empty;
     public string Localidade { get; set; } = string.Empty;
     public short Ativo { get; set; } = 1;
+    public string NumeroCedula { get; set; } = string.Empty;
+    public int IdEspecialidade { get; set; }
 }

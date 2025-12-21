@@ -116,8 +116,8 @@ CREATE TABLE PessoalAdministrativo (
 );
 
 
-CREATE TABLE PessoaClinico (
-    idPessoaClinico NVARCHAR(15),
+CREATE TABLE PessoaClinicas (
+    idPessoaClinica NVARCHAR(15),
     idUtilizador INT NOT NULL,
     idEspecialidade INT NOT NULL,
     
@@ -136,7 +136,7 @@ CREATE TABLE PessoaClinico (
     
     ativo BIT DEFAULT 1,
 
-    CONSTRAINT PK_PessoaClinico PRIMARY KEY (idPessoaClinico),
+    CONSTRAINT PK_PessoaClinico PRIMARY KEY (idPessoaClinica),
     CONSTRAINT FK_PessoaClinico_Utilizador FOREIGN KEY (idUtilizador) 
         REFERENCES Utilizadores(idUtilizador),
     CONSTRAINT FK_PessoaClinico_Especialidade FOREIGN KEY (idEspecialidade) 
@@ -148,8 +148,7 @@ CREATE TABLE PessoaClinico (
     -- Validações
     CONSTRAINT CHK_PessoaClinico_Nome CHECK (LENGTH(nome) >= 2),
     CONSTRAINT CHK_PessoaClinico_Email CHECK (email LIKE '%_@__%.__%'),
-    CONSTRAINT CHK_PessoaClinico_Telefone CHECK (telefone NOT LIKE '%[^0-9+]%'),
-    CONSTRAINT CHK_PessoaClinico_CodigoPostal CHECK (codigoPostal IS NULL OR codigoPostal LIKE '[0-9][0-9][0-9][0-9]-%')
+    CONSTRAINT CHK_PessoaClinico_Telefone CHECK (telefone NOT LIKE '%[^0-9+]%')
 );
 
 
@@ -161,9 +160,11 @@ CREATE TABLE PessoaClinico (
 SELECT * FROM utentes;
 SELECT * FROM utilizadores;
 SELECT * FROM PessoaAdministrativo;
-SELECT * FROM PessoaClinico;
+SELECT * FROM PessoaClinicas;
 
 DROP TABLE utentes;
 DROP TABLE utilizadores;
 DROP TABLE PessoalAdministrativo;
-DROP TABLE PessoaClinico;
+DROP TABLE PessoaClinicas;
+
+DELETE FROM utilizadores WHERE idUtilizador = 11;

@@ -8,4 +8,8 @@ public interface IUtilizadorRepository
     Task<bool> EmailExist(string email);
 
     Task<UtilizadorModel> GetUitlizadorByEmail(string? email);
+
+    Task Eliminar(UtilizadorModel utilizadorModel);
+
+    Task<bool> EliminarById(int id);
 }
