@@ -84,8 +84,8 @@ CREATE TABLE utentes (
 
 
 -- Pessoal Administrativo
-CREATE TABLE PessoalAdministrativo (
-    idPessoalAdmin NVARCHAR(15),
+CREATE TABLE PessoaAdministrativas (
+    idPessoaAdmin NVARCHAR(15),
     idUtilizador INT NOT NULL,
     
     nome VARCHAR(100) NOT NULL,
@@ -101,18 +101,18 @@ CREATE TABLE PessoalAdministrativo (
     
     ativo BIT DEFAULT 1,
 
-    CONSTRAINT PK_PessoalAdministrativo PRIMARY KEY (idPessoalAdmin),
-    CONSTRAINT FK_PessoalAdministrativo_Utilizador FOREIGN KEY (idUtilizador) 
+    CONSTRAINT PK_PessoaAdministrativo PRIMARY KEY (idPessoaAdmin),
+    CONSTRAINT FK_PessoaAdministrativo_Utilizador FOREIGN KEY (idUtilizador) 
         REFERENCES Utilizadores(idUtilizador),
     
-    CONSTRAINT UQ_PessoalAdministrativo_Utilizador UNIQUE (idUtilizador),
-    CONSTRAINT UQ_PessoalAdministrativo_Email UNIQUE (email),
+    CONSTRAINT UQ_PessoaAdministrativo_Utilizador UNIQUE (idUtilizador),
+    CONSTRAINT UQ_PessoaAdministrativo_Email UNIQUE (email),
     
     -- Validações
-    CONSTRAINT CHK_PessoalAdministrativo_Nome CHECK (LENGTH(nome) >= 2),
-    CONSTRAINT CHK_PessoalAdministrativo_Email CHECK (email LIKE '%_@__%.__%'),
-    CONSTRAINT CHK_PessoalAdministrativo_Telefone CHECK (telefone IS NULL OR telefone NOT LIKE '%[^0-9+]%'),
-    CONSTRAINT CHK_PessoalAdministrativo_DataAdmissao CHECK (dataAdmissao IS NULL)
+    CONSTRAINT CHK_PessoaAdministrativo_Nome CHECK (LENGTH(nome) >= 2),
+    CONSTRAINT CHK_PessoaAdministrativo_Email CHECK (email LIKE '%_@__%.__%'),
+    CONSTRAINT CHK_PessoaAdministrativo_Telefone CHECK (telefone IS NULL OR telefone NOT LIKE '%[^0-9+]%'),
+    CONSTRAINT CHK_PessoaAdministrativo_DataAdmissao CHECK (dataAdmissao IS NULL)
 );
 
 
@@ -151,7 +151,31 @@ CREATE TABLE PessoaClinicas (
     CONSTRAINT CHK_PessoaClinico_Telefone CHECK (telefone NOT LIKE '%[^0-9+]%')
 );
 
+-- Consultas
+CREATE TABLE Consultas (
+    idConsulta INT AUTO_INCREMENT,
+    idUtente NVARCHAR(20) NOT NULL,
+    idPessoaClinica NVARCHAR(20),
+    
+    dataConsulta DATE NOT NULL,
+    horaConsulta TIME NOT NULL,
+    descricao VARCHAR(200) NULL,
+    observacoes NVARCHAR(500) NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'Pendente',
+    
+    dataCriacao DATETIME,
+    dataUltimaAtualizacao DATETIME NULL,
 
+    CONSTRAINT PK_Consulta PRIMARY KEY (idConsulta),
+    CONSTRAINT FK_Consulta_Utente FOREIGN KEY (idUtente) 
+        REFERENCES utentes(idUtente),
+    CONSTRAINT FK_Consulta_PessoalClinico FOREIGN KEY (idPessoaClinica) 
+        REFERENCES PessoaClinicas(idPessoaClinica),
+    
+    -- Validações
+    CONSTRAINT CHK_Consulta_Hora CHECK (horaConsulta BETWEEN '07:00' AND '20:00'),
+    CONSTRAINT CHK_Consulta_Estado CHECK (estado IN ('Pendente', 'Marcado', 'Realizada', 'Cancelada'))
+);
 
 
 -- ========================================
@@ -159,12 +183,15 @@ CREATE TABLE PessoaClinicas (
 -- ========================================
 SELECT * FROM utentes;
 SELECT * FROM utilizadores;
-SELECT * FROM PessoaAdministrativo;
+SELECT * FROM PessoaAdministrativas;
 SELECT * FROM PessoaClinicas;
+SELECT * FROM Consultas;
 
 DROP TABLE utentes;
 DROP TABLE utilizadores;
 DROP TABLE PessoalAdministrativo;
 DROP TABLE PessoaClinicas;
+DROP TABLE Consulta;
+
 
 DELETE FROM utilizadores WHERE idUtilizador = 11;
