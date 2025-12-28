@@ -72,7 +72,12 @@ public class LoginController : Controller
             TempData["ErrorMessage"] = result.Message;
             return View("Login", utilizadorDTO);
         }
-        var numeroUtente = await _getUtenteNumero.GetUtenteNumeroAsync(result.Data.Email);
+
+        var numeroUtente = string.Empty;
+        if (utilizadorDTO.TipoUtilizador == "Utente")
+        {
+            numeroUtente = await _getUtenteNumero.GetUtenteNumeroAsync(result.Data.Email);
+        }
 
         if (!result.Status)
         {
@@ -126,9 +131,20 @@ public class LoginController : Controller
         return role switch
         {
             "Utente" => RedirectToAction("Index", "HomeUtente"),
-            "PessaoaAdministrativa" => RedirectToAction("Index", "Home"),
-            "PessoaClinica" => RedirectToAction("Index", "HomePessoaClinica"),
-            _ => RedirectToAction("Login"),
+            "Administrativo" => RedirectToAction("Index", "Home"), // Nome exato do SQL
+            "Clinico" => RedirectToAction("Index", "HomePessoaClinica"), // Nome exato do SQL
+            _ => RedirectToAction("Index", "Home") // NUNCA redirecione para "Login" aqui!
         };
     }
+
+    //private IActionResult RedirectionBaseadoNoRole(string? role)
+    //{
+    //    return role switch
+    //    {
+    //        "Utente" => RedirectToAction("Index", "HomeUtente"),
+    //        "PessaoaAdministrativa" => RedirectToAction("Index", "Home"),
+    //        "PessoaClinica" => RedirectToAction("Index", "HomePessoaClinica"),
+    //        _ => RedirectToAction("Login"),
+    //    };
+    //}
 }
