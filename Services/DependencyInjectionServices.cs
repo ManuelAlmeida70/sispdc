@@ -1,5 +1,10 @@
 ﻿using SisPDC.Data.Repositories;
 using SisPDC.Models.Repositories;
+using SisPDC.Services.Administrativa.Add;
+using SisPDC.Services.Administrativa.GerarNumeroAdministrativo;
+using SisPDC.Services.Administrativa.GetAll;
+using SisPDC.Services.Consulta.Add;
+using SisPDC.Services.Consulta.GetAll;
 using SisPDC.Services.CriptPassword;
 using SisPDC.Services.Especialidade.Add;
 using SisPDC.Services.Especialidade.DeleteById;
@@ -56,6 +61,16 @@ public static class DependencyInjectionServices
         services.AddScoped<IGetAllMedicos, GetAllMedicos>();
         services.AddScoped<IGetByIdMedico, GetByIdMedico>();
         services.AddScoped<IEliminarByIdMedico, EliminarByIdMedico>();
+
+        //Consulta
+        services.AddScoped<IAddConsulta, AddConsulta>();
+        services.AddScoped<IGetAllConsulta, GetAllConsulta>();
+
+
+        //Administrativa
+        services.AddScoped<IAddAdministrativa, AddAdministrativa>();
+        services.AddScoped<IGerarNumeroAdministrativo, GerarNumeroAdministrativo>();
+        services.AddScoped<IGetAllAdministrativa, GetAllAdministrativa>();
 
 
         services.AddScoped<ICriptPassword, CriptPassworded>();

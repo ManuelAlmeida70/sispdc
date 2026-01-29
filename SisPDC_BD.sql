@@ -84,7 +84,7 @@ CREATE TABLE utentes (
 
 
 -- Pessoal Administrativo
-CREATE TABLE PessoaAdministrativas (
+CREATE TABLE pessoaAdministrativas (
     idPessoaAdmin NVARCHAR(15),
     idUtilizador INT NOT NULL,
     
@@ -195,3 +195,53 @@ DROP TABLE Consulta;
 
 
 DELETE FROM utilizadores WHERE idUtilizador = 11;
+
+
+-- ===============================================================================
+INSERT INTO utilizadores (
+    nome, 
+    email, 
+    palavraPasse, 
+    palavraPasseSalt, 
+    tipoUtilizador, 
+    dataCriacao, 
+    ativo
+) 
+VALUES (
+    'Administrador Root', 
+    'root@sistema.com', 
+    -- Vamos usar a senha 'root123' convertida para SHA2 (256 bits)
+    UNHEX(SHA2('root123', 256)), 
+    -- Um salt fixo para este exemplo (em hexadecimal)
+    0x010203040506, 
+    'Administrativo', 
+    NOW(), 
+    1
+);
+
+INSERT INTO pessoaAdministrativas (
+    idPessoaAdmin, 
+    idUtilizador, 
+    nome, 
+    email, 
+    telefone, 
+    cargo, 
+    dataAdmissao, 
+    morada, 
+    codigoPostal, 
+    localidade, 
+    ativo
+) 
+VALUES (
+    'ADM-ROOT-01', -- idPessoaAdmin (NVARCHAR 15)
+    (SELECT idUtilizador FROM utilizadores WHERE email = 'root@sistema.com'), -- Busca o ID do utilizador criado
+    'Administrador Root', 
+    'root@sistema.com', 
+    '+351210000000', 
+    'Administrador de Sistemas', 
+    NULL, -- Obrigatório ser NULL devido à sua CONSTRAINT
+    'Avenida Principal, nº 1', 
+    '1000-001', 
+    'Kilamba', 
+    1
+);

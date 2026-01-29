@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
 
-[Authorize(Roles = "Administrativo")]
+//[Authorize(Roles = "Administrativo")]
 public class MedicoController : Controller
 {
 

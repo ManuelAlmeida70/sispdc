@@ -1,13 +1,18 @@
-﻿@model SisPDC.Models.Entities.EspecialidadeModel
+﻿@model List<SisPDC.Models.Entities.ConsultaModel>
 
 @{
     Layout = "_LayoutAdmin";
 }
 
 
+
+@section Styles {
+    <link href="~/css/pessoalClinico.css" rel="stylesheet" />
+}
+
 <!-- Main Content -->
 <div class="main-content">
-    
+
 
     <!-- Content Area -->
     <div class="content-area">
@@ -53,7 +58,14 @@
                 </div>
             </div>
         </div>
-
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
         <!-- Charts Grid -->
         <div class="chart-grid">
             <div class="chart-card">
@@ -121,59 +133,10 @@
 
         <!-- Appointments List -->
         <div class="appointments-list">
-            <div class="appointments-header">
-                <h4>Consultas Recentes</h4>
-            </div>
-            <div class="appointment-item">
-                <div class="patient-info">
-                    <div class="patient-avatar">JD</div>
-                    <div class="patient-details">
-                        <h5>João Domingos</h5>
-                        <p>Dr. Silva • Cardiologia • 10:00 AM</p>
-                    </div>
-                </div>
-                <span class="appointment-status status-confirmed">Confirmado</span>
-            </div>
-            <div class="appointment-item">
-                <div class="patient-info">
-                    <div class="patient-avatar" style="background: linear-gradient(135deg, #43a047, #66bb6a);">MA</div>
-                    <div class="patient-details">
-                        <h5>Maria António</h5>
-                        <p>Dr. Costa • Pediatria • 11:30 AM</p>
-                    </div>
-                </div>
-                <span class="appointment-status status-pending">Pendente</span>
-            </div>
-            <div class="appointment-item">
-                <div class="patient-info">
-                    <div class="patient-avatar" style="background: linear-gradient(135deg, #fb8c00, #ffa726);">PF</div>
-                    <div class="patient-details">
-                        <h5>Paulo Francisco</h5>
-                        <p>Dr. Mendes • Ortopedia • 02:00 PM</p>
-                    </div>
-                </div>
-                <span class="appointment-status status-confirmed">Confirmado</span>
-            </div>
-            <div class="appointment-item">
-                <div class="patient-info">
-                    <div class="patient-avatar" style="background: linear-gradient(135deg, #e53935, #ef5350);">AS</div>
-                    <div class="patient-details">
-                        <h5>Ana Silva</h5>
-                        <p>Dr. Pereira • Neurologia • 03:30 PM</p>
-                    </div>
-                </div>
-                <span class="appointment-status status-cancelled">Cancelado</span>
-            </div>
-            <div class="appointment-item">
-                <div class="patient-info">
-                    <div class="patient-avatar" style="background: linear-gradient(135deg, #8e24aa, #ab47bc);">CM</div>
-                    <div class="patient-details">
-                        <h5>Carlos Manuel</h5>
-                        <p>Dr. Santos • Cardiologia • 04:00 PM</p>
-                    </div>
-                </div>
-                <span class="appointment-status status-confirmed">Confirmado</span>
-            </div>
+            
         </div>
-    </div>
 </div>
+
+@section Scripts {
+        <script src="~/js/site.js"></script>
+}

@@ -131,20 +131,9 @@ public class LoginController : Controller
         return role switch
         {
             "Utente" => RedirectToAction("Index", "HomeUtente"),
-            "Administrativo" => RedirectToAction("Index", "Home"), // Nome exato do SQL
+            "Administrativo" => RedirectToAction("Index", "Administrativa"), // Nome exato do SQL
             "Clinico" => RedirectToAction("Index", "HomePessoaClinica"), // Nome exato do SQL
             _ => RedirectToAction("Index", "Home") // NUNCA redirecione para "Login" aqui!
         };
     }
-
-    //private IActionResult RedirectionBaseadoNoRole(string? role)
-    //{
-    //    return role switch
-    //    {
-    //        "Utente" => RedirectToAction("Index", "HomeUtente"),
-    //        "PessaoaAdministrativa" => RedirectToAction("Index", "Home"),
-    //        "PessoaClinica" => RedirectToAction("Index", "HomePessoaClinica"),
-    //        _ => RedirectToAction("Login"),
-    //    };
-    //}
 }

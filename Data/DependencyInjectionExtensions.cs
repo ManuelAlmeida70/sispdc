@@ -18,6 +18,8 @@ public static class DependencyInjectionExtensions
         services.AddScoped<IUtenteRepository, UtenteRepository>();
         services.AddScoped<IUtilizadorRepository, UtilizadorRepository>();
         services.AddScoped<IPessoaClinicaRepository, PessoaClinicaRepository>();
+        services.AddScoped<IConsultaRepository, ConsultaRepository>();
+        services.AddScoped<IPessoaAdministrativaRepository, PessoaAdministrativaRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

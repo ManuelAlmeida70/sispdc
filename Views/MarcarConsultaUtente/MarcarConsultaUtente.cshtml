@@ -1,8 +1,10 @@
-﻿
+﻿@model SisPDC.DTOs.ConsultaDTO
 
 @{
     Layout = "_LayoutUtente";
     ViewData["Title"] = "Marcar Consulta";
+
+    var NumeroUtente = User.FindFirst("NumeroUtente")?.Value;
 }
 
 <!-- Main Content -->
@@ -31,9 +33,28 @@
     <div class="row">
         <!-- Form Column -->
         <div class="col-lg-8">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                    <i class="bi bi-check-circle me-2"></i>
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+                    <i class="bi bi-check-circle me-2"></i>
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+
             <div class="info-card">
-                <form asp-action="MarcarConsulta" method="post" id="formMarcarConsulta">
-                    <input type="hidden"  />
+                <form asp-action="MarcarConsulta" asp-controller="HomeUtente" method="post" id="formMarcarConsulta">
+                    <input asp-for="IdUtente" type="hidden" value="@NumeroUtente" />
 
                     <!-- Etapa 1: Especialidade e Médico -->
                     <div class="mb-4">
@@ -70,15 +91,15 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Data da Consulta <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" required
+                                <label asp-validation-for="DataConsulta" class="form-label fw-bold">Data da Consulta <span class="text-danger">*</span></label>
+                                <input asp-for="DataConsulta" type="date" class="form-control" required
                                        min="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                 <span  class="text-danger"></span>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Hora da Consulta <span class="text-danger">*</span></label>
-                                <select  class="form-select" required>
+                                <label asp-validation="HoraConsulta" class="form-label fw-bold">Hora da Consulta <span class="text-danger">*</span></label>
+                                <select asp-for="HoraConsulta"  class="form-select" required>
                                     <option value="">Selecione uma hora</option>
                                     <option value="07:00">07:00</option>
                                     <option value="07:30">07:30</option>
@@ -124,15 +145,15 @@
                         <h5 class="section-title"><i class="bi bi-3-circle me-2"></i>Detalhes da Consulta</h5>
 
                         <div class="mb-3">
-                            <label  class="form-label fw-bold">Motivo da Consulta</label>
-                            <input a type="text" class="form-control"
+                            <label class="form-label fw-bold">Motivo da Consulta</label>
+                            <input asp-for="Descricao" type="text" class="form-control"
                                    placeholder="Ex: Consulta de rotina, dores no peito, etc." maxlength="200" />
                             <span  class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label  class="form-label fw-bold">Observações Adicionais</label>
-                            <textarea  class="form-control" rows="4"
+                            <textarea asp-for="Observacoes"  class="form-control" rows="4"
                                       placeholder="Descreva sintomas, histórico recente ou outras informações relevantes para o médico..."
                                       maxlength="500"></textarea>
                             <span  class="text-danger"></span>
