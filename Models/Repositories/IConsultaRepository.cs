@@ -7,6 +7,8 @@ public interface IConsultaRepository
 {
     Task Add(ConsultaModel consulta);
     Task<List<ConsultaModel>> GetAll();
-    Task<ConsultaModel> GetByIdUtente(string? id);
-    Task<ConsultaModel> GetByIdPessoaAdministrativa(string? id);
+    Task<List<ConsultaModel>> GetByIdUtenteAll(string? id);
+    Task<ConsultaModel> GetByIdPessoaClinica(string? id);
+    Task<ConsultaModel> GetById(string? id);
+    Task<bool> AtribuirMedico(int idConsulta, string idPessoaClinica);
 }

@@ -40,6 +40,6 @@ public class PessoaClinicaRepository : IPessoaClinicaRepository
     {
         var medico = await _context.PessoaClinicas.FirstOrDefaultAsync(x => x.IdPessoaClinica == id);
 
-        return medico;
+        return medico!;
     }
 }

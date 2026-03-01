@@ -48,7 +48,7 @@
                         <th style="width: 5%;">ID</th>
                         <th style="width: 25%;">Nome</th>
                         <th style="width: 15%;">Cargo</th>
-                        <th style="width: 20%;">Especialidade</th>
+                        @* <th style="width: 20%;">Especialidade</th> *@
                         <th style="width: 15%;">Telefone</th>
                         <th style="width: 10%;">Ativo</th>
                         <th style="width: 10%;">Ações</th>
@@ -68,11 +68,11 @@
                                     <small class="text-muted">@pessoa.Email</small>
                                 </td>
                                 <td>@pessoa.Cargo</td>
-                                <td>@{
+                                @* <td>@{
                                         
                                         @pessoa.IdEspecialidade.ToString()
                                     }
-                                </td>
+                                </td> *@
                                 <td>@pessoa.Telefone</td>
                                 <td>
                                     @if (pessoa.Ativo == 1)

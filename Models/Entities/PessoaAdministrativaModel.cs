@@ -59,5 +59,5 @@ public class PessoaAdministrativaModel
 
     // Navegação
     [ForeignKey("IdUtilizador")]
-    public virtual UtilizadorModel Utilizador { get; set; }
+    public virtual UtilizadorModel? Utilizador { get; set; }
 }

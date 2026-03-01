@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SisPDC.Controllers;
 
-//[Authorize(Roles = "Administrativo")]
+[Authorize(Roles = "Administrativo")]
 public class MedicoController : Controller
 {
 
@@ -46,7 +46,7 @@ public class MedicoController : Controller
 
         var medicoDTO = new PessoaClinicoEliminarDTO()
         {
-            Cargo = medico.Cargo,
+            Cargo = medico.Cargo!,
             IdClinico = medico.IdPessoaClinica,
             Nome = medico.Nome,
             IdEspecialidade = medico.IdEspecialidade.ToString(),

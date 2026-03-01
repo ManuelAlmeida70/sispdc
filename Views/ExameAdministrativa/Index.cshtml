@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SisPDC.DTOs.ExameListagemDTO>
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Listar Exames";
+}
+@section Styles {
+    <link href="~/css/pessoalClinico.css" rel="stylesheet" />
+}
+<div class="content-wrapper">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-circle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <div class="data-table-card">
+        <div class="table-header">
+            <h4><i class="bi bi-clipboard2-pulse-fill me-2"></i> Listagem de Exames</h4>
+        </div>
+        <div class="table-responsive p-2">
+            <table id="exames" class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">ID</th>
+                        <th style="width: 15%;">Tipo de Exame</th>
+                        <th style="width: 20%;">Descrição</th>
+                        <th style="width: 15%;">Médico</th>
+                        <th style="width: 15%;">Especialidade</th>
+                        <th style="width: 10%;">Data</th>
+                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 5%;">Resultado</th>
+                        <th style="width: 5%;">Arquivo</th>
+                        <th style="width: 10%;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var exame in Model)
+                        {
+                            <tr>
+                                <td>@exame.IdExame</td>
+                                <td>@exame.TipoExame</td>
+                                <td>@exame.Descricao</td>
+                                <td>@exame.NomeMedico</td>
+                                <td>@exame.EspecialidadeMedico</td>
+                                <td>@exame.DataFormatada</td>
+                                <td>
+                                    <span class="@exame.EstadoClass">
+                                        <i class="bi @exame.EstadoIcone me-1"></i>
+                                        @exame.Estado
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    @if (exame.TemResultados)
+                                    {
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @if (exame.TemArquivo)
+                                    {
+                                        <i class="bi bi-paperclip text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a asp-action="Detalhes" asp-controller="Exame"
+                                           asp-route-id="@exame.IdExame" class="btn-action btn-edit">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <a asp-action="Eliminar" asp-controller="Exame"
+                                           asp-route-id="@exame.IdExame" class="btn-action btn-delete">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

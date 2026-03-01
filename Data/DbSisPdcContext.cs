@@ -16,6 +16,7 @@ public class DbSisPdcContext : DbContext
     public  DbSet<PessoaAdministrativaModel> PessoaAdministrativas { get; set; }
     public  DbSet<PessoaClinicaModel> PessoaClinicas { get; set; }
     public  DbSet<ConsultaModel> Consultas { get; set; }
+    public  DbSet<ExamesModel> Exames { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

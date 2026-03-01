@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SisPDC.DTOs;
 using SisPDC.Services.Consulta.Add;
-using System.Threading.Tasks;
+using SisPDC.Services.Exames.Add;
 
 namespace SisPDC.Controllers;
 
@@ -33,5 +33,27 @@ public class HomeUtenteController : Controller
             TempData["SuccessMessage"] = consulta.Message;
         }
         return View("~/Views/MarcarConsultaUtente/MarcarConsultaUtente.cshtml");
+    }
+
+    public IActionResult MarcarExameUtente()
+    {
+        return View("~/Views/MarcarExameUtente/MarcarExameUtente.cshtml");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> MarcarExameUtente(CriarExameDTO criarExameDTO, [FromServices] IAddExame useCase)
+    {
+        var response = await useCase.Execute(criarExameDTO);
+
+        if (response.Data is null)
+        {
+            TempData["ErrorMessage"] = response.Message;
+        }
+        else
+        {
+            TempData["SuccessMessage"] = response.Message;
+        }
+
+        return View("~/Views/MarcarExameUtente/MarcarExameUtente.cshtml");
     }
 }

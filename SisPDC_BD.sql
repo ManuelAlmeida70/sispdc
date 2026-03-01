@@ -177,6 +177,46 @@ CREATE TABLE Consultas (
     CONSTRAINT CHK_Consulta_Estado CHECK (estado IN ('Pendente', 'Marcado', 'Realizada', 'Cancelada'))
 );
 
+-- Tabela de Exames
+CREATE TABLE exames (
+    idExame INT AUTO_INCREMENT,
+    idUtente NVARCHAR(15) NOT NULL,
+    idPessoaClinica NVARCHAR(15) NULL,
+    idConsulta INT NULL, -- Referência à consulta que originou o exame (opcional)
+    
+    tipoExame VARCHAR(100) NOT NULL, -- Ex: 'Hemograma', 'Raio-X', 'Ressonância'
+    descricao VARCHAR(200) NULL,
+    dataRequisicao DATE NOT NULL,
+    dataPrevista DATE NULL, -- Data prevista para realização
+    dataRealizacao DATE NULL, -- Data efetiva de realização
+    
+    resultados TEXT NULL, -- Resultados do exame
+    observacoes NVARCHAR(500) NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'Requisitado',
+    
+    -- Informações do arquivo (se houver documento digitalizado)
+    caminhoArquivo VARCHAR(255) NULL,
+    
+    -- Auditoria
+    dataCriacao DATETIME NOT NULL DEFAULT NOW(),
+    dataUltimaAtualizacao DATETIME NULL,
+    ativo BIT DEFAULT 1,
+
+    CONSTRAINT PK_Exame PRIMARY KEY (idExame),
+    CONSTRAINT FK_Exame_Utente FOREIGN KEY (idUtente) 
+        REFERENCES utentes(idUtente),
+    CONSTRAINT FK_Exame_PessoalClinico FOREIGN KEY (idPessoaClinica) 
+        REFERENCES PessoaClinicas(idPessoaClinica),
+    CONSTRAINT FK_Exame_Consulta FOREIGN KEY (idConsulta) 
+        REFERENCES Consultas(idConsulta),
+    
+    -- Validações
+    CONSTRAINT CHK_Exame_TipoExame CHECK (CHAR_LENGTH(tipoExame) >= 3),
+    CONSTRAINT CHK_Exame_Estado CHECK (estado IN ('Requisitado', 'Agendado', 'Realizado', 'Cancelado')),
+    CONSTRAINT CHK_Exame_DataRealizacao CHECK (dataRealizacao IS NULL OR dataRealizacao >= dataRequisicao)
+);
+
+
 
 -- ========================================
 -- SELECTs DAS TABELAS
@@ -186,62 +226,12 @@ SELECT * FROM utilizadores;
 SELECT * FROM PessoaAdministrativas;
 SELECT * FROM PessoaClinicas;
 SELECT * FROM Consultas;
-
-DROP TABLE utentes;
-DROP TABLE utilizadores;
-DROP TABLE PessoalAdministrativo;
-DROP TABLE PessoaClinicas;
-DROP TABLE Consulta;
+SELECT * FROM Especialidades;
 
 
-DELETE FROM utilizadores WHERE idUtilizador = 11;
 
+
+DELETE FROM utilizadores WHERE idUtilizador = 14;
+DELETE FROM PessoaAdministrativas WHERE idPessoaAdmin = "ADM-ROOT-01";
 
 -- ===============================================================================
-INSERT INTO utilizadores (
-    nome, 
-    email, 
-    palavraPasse, 
-    palavraPasseSalt, 
-    tipoUtilizador, 
-    dataCriacao, 
-    ativo
-) 
-VALUES (
-    'Administrador Root', 
-    'root@sistema.com', 
-    -- Vamos usar a senha 'root123' convertida para SHA2 (256 bits)
-    UNHEX(SHA2('root123', 256)), 
-    -- Um salt fixo para este exemplo (em hexadecimal)
-    0x010203040506, 
-    'Administrativo', 
-    NOW(), 
-    1
-);
-
-INSERT INTO pessoaAdministrativas (
-    idPessoaAdmin, 
-    idUtilizador, 
-    nome, 
-    email, 
-    telefone, 
-    cargo, 
-    dataAdmissao, 
-    morada, 
-    codigoPostal, 
-    localidade, 
-    ativo
-) 
-VALUES (
-    'ADM-ROOT-01', -- idPessoaAdmin (NVARCHAR 15)
-    (SELECT idUtilizador FROM utilizadores WHERE email = 'root@sistema.com'), -- Busca o ID do utilizador criado
-    'Administrador Root', 
-    'root@sistema.com', 
-    '+351210000000', 
-    'Administrador de Sistemas', 
-    NULL, -- Obrigatório ser NULL devido à sua CONSTRAINT
-    'Avenida Principal, nº 1', 
-    '1000-001', 
-    'Kilamba', 
-    1
-);
